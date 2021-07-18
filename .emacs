@@ -1,58 +1,61 @@
-;;====================================================================================
-;; Global keys
-;;====================================================================================
+(set-language-environment "Korean")
+(prefer-coding-system 'utf-8)
 
-(global-set-key (kbd "S-C-<left>") 'shrink-window-horizontally)
-(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "S-C-<down>") 'shrink-window)
-(global-set-key (kbd "S-C-<up>") 'enlarge-window)
+(set-file-name-coding-system 'cp949-dos)
 
-;; (global-set-key (kbd "S-C-r") 'find-grep-dired)
+;------------------------------------------------------------------------------------------
+;; Package repositories
+;;------------------------------------------------------------------------------------------
 
-;;====================================================================================
-;; Basic Setup 
-;;====================================================================================
+(require 'package)
+(add-to-list
+  'package-archives
+  '("melpa" . "http://melpa.org/packages/")
+  t)  
+(package-initialize)
 
-(setq 
- org-default-notes-file "/home/sehwanyoo/projects/dl_for_mss/contents.org"
- initial-buffer-choice  org-default-notes-file)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(column-number-mode t)
+ '(custom-enabled-themes '(doom-dark+))
+ '(custom-safe-themes
+   '("76bfa9318742342233d8b0b42e824130b3a50dcc732866ff8e47366aed69de11" default))
+ '(gnutls-algorithm-priority "normal:-vers-tls1.3")
+ '(package-selected-packages
+   '(doom-themes elpygen importmagic py-autopep8 py-yapf auto-complete magit pyenv-mode python-mode setup-cygwin cygwin-mount transpose-frame ipython-shell-send elpy smartparens duplicate-thing company-anaconda web-modeess helm-rg helm-projectile projectile ein jupyter pyvenv flycheck-pyflakes live-py-mode company-jedi jedi anaconda-mode swift-mode ace-window matlab-mode yasnippet swiper iedit highlight-indentation flycheck eyebrowse avy anzu))
+ '(show-paren-mode t))
 
-(global-auto-revert-mode)
+;;------------------------------------------------------------------------------------------
+;; Basic
+;;------------------------------------------------------------------------------------------
 
-;; (turn-off-auto-fill)
+;; auto-fill-mode disable
 (auto-fill-mode -1)
 
-(setq
-   backup-by-copying t      ; don't clobber symlinks
-   backup-directory-alist
-    '(("." . "~/.saves.d/"))    ; don't litter my fs tree
-   delete-old-versions t
-   kept-new-versions 6
-   kept-old-versions 2
-   version-control t)       ; use versioned backups
+;; font size
+;; (set-face-font 'default "Monaco-13")   
 
 ;; Removing tutorial page
 (setq inhibit-startup-message t)
 
-;; cursor types 
+;; cursor types
 (setq-default cursor-type 'box)
 ;; (setq-default cursor-type 'bar)
 ;; (setq-default cursor-type 'hbar)
 
-;; cursor line 
-;; (global-hl-line-mode 1)
-;; (set-face-background 'hl-line "#333333")
-
-;; line number 
+;; line number
 (global-linum-mode t)
 
-;; selection 
+;; selection
 (transient-mark-mode t)
 
-;; whole selection 
+;; whole selection
 ;; (define-key global-map (kbd "C-a") 'mark-whole-buffer)
 
-;; tab size 
+;; tab size
 (setq-default tab-width 2)
 
 ;; location view
@@ -62,124 +65,382 @@
 ;; Yes/NO - > y/n
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; ringing removing 
+;; ringing removing
 (setq ring-bell-function 'ignore)
 
 ;; minibuffer histories
 (savehist-mode 1)
 
-;; window size 
-(add-to-list 'default-frame-alist '(height . 100))
-(add-to-list 'default-frame-alist '(width . 200))
-(set-frame-position (selected-frame) 0 0)
+;; window size
+;; (add-to-list 'default-frame-alist '(height . 100))
+;; (add-to-list 'default-frame-alist '(width . 200))
+;; (set-frame-position (selected-frame) 0 0)
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+
+;;ÆÄÀÏ ÆíÁı À§Ä¡ ±â¾ï
+(require 'saveplace)
+(setq-default save-place t)
+(setq save-place-file     "~/_places.sav")
+
+;;ÃÖ±Ù ÆÄÀÏ Á¢±Ù
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 20) ; ÃÖ±Ù ÆÄÀÏ ¸ñ·Ï ¼ö
+
+;;GUI È¯°æ¿¡¼­ ÁÙ °£°İ Á¶Àı
+(setq-default line-spacing 15)
+
+;;ÆÄÀÏÀÌ ¼öÁ¤µÇ¾úÀ» ¶§ ÀÚµ¿À¸·Î ´Ù½Ã ÀĞ¾îµéÀÌµµ·Ï ÇÏ´Â ¼³Á¤
+(global-auto-revert-mode t)
 
 ;; blanket
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 
+;;ÆÄÀÏ ÆíÁı À§Ä¡ ±â¾ï
+;; (require 'saveplace)
+;; (setq-default save-place t)
+;; (setq save-place-file     "~/_places.sav")
 
-;; font size
-;; (set-face-font 'default "Monaco-13")
+;;ÃÖ±Ù ÆÄÀÏ Á¢±Ù
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 20) ; ÃÖ±Ù ÆÄÀÏ ¸ñ·Ï ¼ö
 
-;;====================================================================================
-;; Repositories package
-;;====================================================================================
+;;GUI È¯°æ¿¡¼­ ÁÙ °£°İ Á¶Àı
+(setq-default line-spacing 1)
 
-(require 'package)
-(add-to-list 'package-archives'("marmalade" . "http://marmalade-repo.org/packages/") t)
-(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/") t)
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives '("melpa" . "http://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives'("melpa" . "http://melpa.org/packages/") t)
+;;ÆÄÀÏÀÌ ¼öÁ¤µÇ¾úÀ» ¶§ ÀÚµ¿À¸·Î ´Ù½Ã ÀĞ¾îµéÀÌµµ·Ï ÇÏ´Â ¼³Á¤
+(global-auto-revert-mode t)
 
-(package-initialize)
+;;ÆäÀÌÁö ³Ñ±æ ¶§ 3ÁÙÀº Æ÷ÇÔ.
+(setq next-screen-context-lines 3)
 
-;;====================================================================================
-;; Basic setup of repositoeis
-;;====================================================================================
+;;Ã£±â ±â´É¿¡¼­ ÇÏÀÌ¶óÀÌÆ® ¼³Á¤
+(setq search-highlight t)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-	 [default default default italic underline success warning error])
- '(column-number-mode t)
- '(custom-enabled-themes (quote (misterioso)))
- '(ecb-options-version "2.50")
- '(global-whitespace-mode t)
- '(matlab-shell-command-switches (quote ("-nodesktop -noslpash -nojvm")) t)
- '(package-selected-packages
-	 (quote
-		(helm-gtags company-jedi jedi-direx color-identifiers-mode pyenv-mode material-theme better-defaults flymake-python-pyflakes importmagic py-yapf py-autopep8 jedi elpy wgrep swiper ac-ispell ac-dcd pymacs ivy rw-hunspell company-anaconda auto-package-update nimbus-theme company-auctex use-package auctex-latexmk diff-hl yasnippet ac-math auto-complete magic-latex-buffer latex-pretty-symbols pdf-tools)))
- '(show-paren-mode t))
+;;Àß¶ó³»±â, ºÙ¿©³Ö±â, CTRL+C, V¸¦ È°¼ºÈ­ ½ÃÄÑÁØ´Ù. À©µµ¿ì Ã³·³ »ç¿ë°¡´ÉÇÏ´Ù.
+;; (cua-mode)
+
+;;ÃÖ±Ù ÀÛ¾÷ ÆÄÀÏ ¸ñ·Ï ¿­±â
+(global-set-key [f1] 'recentf-open-files)
+
+;ÆÄÀÏ Å½»ö±â Dired ¸ğµå ÄÑ±â
+(global-set-key [f2] 'dired)
+
+;;ºí·° ¼±ÅÃºÎºĞ »ö»ó ¹İÀü½ÃÅ°±â
+(setq-default transient-mark-mode t)
+
+;; ÅÇ ´ë½Å °ø¹é ³Ö±â
+(setq-default indent-tabs-mode nil)
+
+(defun set-default-programming-style ()
+  ;; ¿£ÅÍ ÀÔ·Â½Ã µé¿©¾²±â
+  (local-set-key (kbd "<return>") 'newline-and-indent)
+
+  ;; ÅÇÅ° ÀÔ·Â½Ã ¿µ¿ªÁöÁ¤µÇ¾î ÀÖÀ¸¸é ¿µ¿ª µé¿©¾²±â. ¿µ¿ª¾øÀ¸¸é ÅÇÅ°.
+  (local-set-key (kbd "<tab>") 'indent-block)
+
+  ;; µé¿©¾²±â ÇÒ ¶§ ½ÇÁ¦ ÅÇ¹®ÀÚ ÀÔ·Â
+  (setq indent-tabs-mode t)
+
+  ;; ÅÇ »çÀÌÁî 4
+  (setq tab-width 4)
+
+  ;; ÁÙ¹øÈ£ Ç¥½Ã
+  (linum-mode 1)
+  )
+
+;; backup files À§Ä¡ ¼±Á¤
+(setq
+   backup-by-copying t      ; don't clobber symlinks
+   backup-directory-alist
+    '(("." . "~/.saves/"))    ; don't litter my fs tree
+   delete-old-versions t
+   kept-new-versions 6
+   kept-old-versions 2
+   version-control t)       ; use versioned backups
+
+;; ±âº» µğ·ºÅä¸® º¯°æ
+(setq default-directory "D:/") 
+
+;; ¼³Á¤ ÆÄÀÏ
+(global-set-key (kbd "<f10>") (lambda() (interactive)(find-file "~/.emacs")))
+
+;; buffer font size 
+(global-set-key (kbd "C-M-+") 'text-scale-increase)
+(global-set-key (kbd "C-M--") 'text-scale-decrease)
+
+
+;;===========================================================================
+;; undo-tree 
+;;===========================================================================
+
+;; (require 'undo-tree)
+;; (global-undo-tree-mode)
+
+;; (eval-after-load "undo-tree"
+;;   (lambda ()
+;;     (define-key undo-tree-map (kbd "C-r") nil)
+;;     (define-key undo-tree-map (kbd "C-?") nil)
+
+;;     ;; C-? C-M-? C-/ Å°·Î org-agenda ¸í·ÉÀ» ¼öÇàÇÕ´Ï´Ù
+;;     (define-key undo-tree-map (kbd "C-?") 'org-agenda-list)
+;;     (define-key undo-tree-map (kbd "C-M-?") 'org-agenda)
+;;     (define-key undo-tree-map (kbd "C-/") 'org-todo-list)
+
+;;     ;; C-_ Å°·Î font Å©±â¸¦ Æ¯Á¤ Å©±â·Î ¸ÂÃçÁÖ´Â ÇÔ¼ö ¼³Á¤
+;;     (define-key undo-tree-map (kbd "C-_") 'set-frame-125)
+
+;;     ))
+
+
+;;===========================================================================
+;; yasnippet
+;;===========================================================================
+
+;; Package: yasnippet
+;; ~/.emacs.d/elpa/yasnippet-.../snippets ¿¡ ÀÖ´Â ÆÄÀÏµéÀ» ~/.emacs.d/snippets ¿¡ ³Ö¾î¾ß Á¤»óÀûÀ¸·Î µ¿ÀÛÇÕ´Ï´Ù
+(require 'yasnippet)
+(yas-global-mode t)
+(setq warning-suppress-types nil)
+;; yasnippet¿¡ elisp ÇÔ¼ö¸¦ ¾²¸é ³ªÅ¸³ª´Â °æ°í¹®À» ¹«½ÃÇÕ´Ï´Ù
+(add-to-list 'warning-suppress-types '(yasnippet backquote-change)) 
+
+
+;;===========================================================================
+;; anzu 
+;;===========================================================================
+
+;; PACKAGE: anzu
+(require 'anzu)
+(global-anzu-mode)
+
+;; M-% Å°·Î ÇØ´ç buffer¿¡¼­ Æ¯Á¤ ´Ü¾î¸¦ ¹Ù²ß´Ï´Ù
+(global-set-key (kbd "M-] r") 'anzu-query-replace)
+;; C-M-% Å°·Î Á¤±ÔÇ¥Çö½ÄÀ» ÀÌ¿ëÇÑ ´Ü¾îÄ¡È¯À» ÇÕ´Ï´Ù
+(global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
+
+
+;; PACKAGE : flycheck
+(require 'flycheck)
+
+;; swiper
+(require 'swiper)
+(global-set-key (kbd "M-] s") 'swiper-all)
+
+;; PACKAGE: avy
+(require 'avy)
+(global-set-key (kbd "M-] a w") 'avy-goto-word-1)
+(global-set-key (kbd "M-] a c") 'avy-goto-char-2)
+(global-set-key (kbd "M-] a l") 'avy-goto-line)
+
+;; PACKGE: eyebrowse
+(require 'eyebrowse)
+(eyebrowse-mode t)
+
+(require 'highlight-indentation)
+
+;;------------------------------------------------------------------------------------------
+;; ace window
+;;------------------------------------------------------------------------------------------
+
+;; Add ace-window hotkey.
+(global-set-key (kbd "M-o") 'ace-window)
+
+;; Set window resize hotkeys.
+
+(global-set-key (kbd "S-C-<left>")  'shrink-window-horizontally)
+(global-set-key (kbd "S-C-<right>") 'enlarge-window-horizontally)
+(global-set-key (kbd "S-C-<up>")  'shrink-window)
+(global-set-key (kbd "S-C-<down>")    'enlarge-window)
+
+
+
+;;------------------------------------------------------------------------------------------
+;; matlab
+;;------------------------------------------------------------------------------------------
+
+(setq matlab-shell-command "C:/Program Files/MATLAB/R2019b/matlabShell")
+(setq matlab-shell-command-switches (list "-nodesktop"))
+
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(whitespace-empty ((t (:foreground "firebrick" :background "SlateGray1"))))
- '(whitespace-hspace ((t (:foreground "lightgray" :background "LemonChiffon3"))))
- '(whitespace-indentation ((t (:foreground "firebrick" :background "beige"))))
- '(whitespace-line ((t (:foreground "black" :background "red"))))
- '(whitespace-newline ((t (:foreground "orange" :background "blue"))))
- '(whitespace-space ((t (:bold t :foreground "gray75"))))
- '(whitespace-space-after-tab ((t (:foreground "black" :background "green"))))
- '(whitespace-space-before-tab ((t (:foreground "black" :background "DarkOrange"))))
- '(whitespace-tab ((t (:foreground "blue" :background "white"))))
- '(whitespace-trailing ((t (:foreground "red" :background "yellow")))))
+ )
+
+(add-hook 'matlab-mode-hook 'turn-off-auto-fill)
 
 ;;====================================================================================
-;; matlab 
+;; whitespace mode 
 ;;====================================================================================
 
-;; (add-to-list 'load-path "~/.emacs.d/down_packages/matlab-emacs")   ;matlab.el path
-;; (add-to-list 'load-path "/usr/bin/matlab")                 ; matlab path
-;; (require 'matlab-load)
-;; (autoload 'run-octave "octave-inf" nil t)                         ;special
-;; (autoload 'matlab-mode "matlab" "Enter MATLAB mode." t)
-;; (setq auto-mode-alist (cons '("\\.m\\'" . matlab-mode) auto-mode-alist))
-;; (autoload 'matlab-shell "matlab" "Interactive MATLAB mode." t)
+;; (require 'whitespace-mode)
+;; (add-hook 'after-init-hook 'whitespace-mode)
+(global-whitespace-mode t)
 
-(setq matlab-shell-command "/home/sehwanyoo/Matlab/bin/matlab")
-(setq matlab-shell-command-switches (list "-nodesktop"))
+(setq whitespace-display-mappings '(
+  (space-mark   ?\     [?\u00B7]     [?.])
+  (space-mark   ?\xA0  [?\u00A4]     [?_])
+  (newline-mark ?\n    [?¢Ò ?\n])
+  (tab-mark     ?\t    [?\u00BB ?\t] [?\\ ?\t])
+            ))
 
-(setq matlab-indent-function-body t)    ; if you want function bodies indented
-(setq matlab-verify-on-save-flag nil)   ; turn off auto-verify on save
-(defun my-matlab-mode-hook ()
-  (setq fill-column 76))		; where auto-fill should wrap
-(add-hook 'matlab-mode-hook 'my-matlab-mode-hook)
-(defun my-matlab-shell-mode-hook ()
-  '())
-(add-hook 'matlab-shell-mode-hook 'my-matlab-shell-mode-hook)
-(global-font-lock-mode t)
-					;  To get hilit19 support try adding:
-(require 'tlc)
-(autoload 'tlc-mode "tlc" "tlc Editing Mode" t)
-(add-to-list 'auto-mode-alist '("\\.tlc$" . tlc-mode))
-(setq tlc-indent-function t)
-(add-hook 'company-mode-hook 'company-mode)
+;; lines lines-tail newline trailing space-before-tab space-afte-tab empty
+;; indentation-space indentation indentation-tab tabs spaces
+(setq whitespace-style '(face space-mark tab-mark newline-mark) )
 
-;; (add-to-list 'load-path "~/.emacs.d/down_packages/matlab-emacs")
-;; (load-library "matlab-load")
+(setq whitespace-line-column 85)
 
-;; Replace path below to be where your matlab.el file is.
-;; (add-to-list 'load-path "~/.emacs.d/down_packages/matlab-emacs")
-;; (load-library "matlab-load")
-;; (custom-set-variables
-;;  '(matlab-shell-command-switches '("-nodesktop -nosplash")))
-;; (add-hook 'matlab-mode-hook 'auto-complete-mode)
-;; (setq auto-mode-alist
-;; 		(cons
-;; 		 '("\\.m$" . matlab-mode)
-;; 		 auto-mode-alist))
+;;====================================================================================
+;; Anaconda mode
+;; ½ÇÇà¹æ¹ı: C-c C-p C-p C-p
+;;====================================================================================
 
-;; (setq exec-path (append exec-path '("/usr/sehwanyoo/Matlab/bin/matlab")))
+(add-hook 'python-mode-hook 'anaconda-mode)
 
 
-;; Enable CEDET feature support for MATLAB code. (Optional)
-;; (matlab-cedet-setup)
+(setq python-shell-interpreter "D:/Anaconda/envs/test_env/python.exe")
+
+(use-package pyvenv
+        :ensure t
+        :init
+        (setenv "test_env" "D:/Aanaconda/envs")
+        (pyvenv-mode 1)
+        (pyvenv-tracking-mode 1))
+
+;; (pyvenv-activate (expand-file-name "~/anaconda/envs/py27")) 
+
+
+
+;;====================================================================================
+;; Bookmark
+;;====================================================================================
+
+;; ;;ºÏ ¸¶Å© ¿­±â
+(global-set-key (kbd "C-M-b") 'bookmark-bmenu-list)
+
+;; ;;ºÏ ¸¶Å©¿¡ ÀúÀå ÇÏ±â
+;; (global-set-key "C-b C-s" 'bookmark-set)
+
+;;ºÏ ¸¶Å©¿¡ ÀúÀå ÇÏ±â Alt + b
+(global-set-key (kbd "C-M-s") 'bookmark-set)
+
+;; ºÏ¸¶Å© »èÁ¦ Ctrl + Alt + b
+(global-set-key (kbd "C-M-d") 'bookmark-delete)
+
+;;ºÏ ¸¶Å© ¿­±â Alt + v
+(global-set-key (kbd "C-M-j") 'bookmark-jump)
+;; (define-key cua--cua-keys-keymap (kbd "C-M-v") 'bookmark-jump) 
+ 
+
+;;====================================================================================
+;; Jupyter notebook
+;; ½ÇÇà¹æ¹ı: ein:notebooklist-open (´Ü, ÀÌÀü¿¡ terminal ¿¡¼­ jupyter notebook À» ¼öÇàÇÑ ÈÄ) 
+;;====================================================================================
+
+(require 'ein)
+(require 'ein-notebook)
+;; (require 'ein-subpackages)              ;
+
+;; (global-set-key (kbd "C-M-e") 'ein:notebook-open)
+(global-set-key (kbd "C-M-1") 'ein:jupyter-server-stop)
+(global-set-key (kbd "C-M-2") 'ein:jupyter-server-start)
+
+(define-key ein:notebook-mode-map "\C-c\C-d"
+            'ein:worksheet-delete-cell)
+
+;;====================================================================================
+;; company-mode
+;;====================================================================================
+
+(add-hook 'after-init-hook 'global-company-mode)
+
+;;====================================================================================
+;; projecttile & helm-projectile
+;;====================================================================================
+
+(require 'projectile)
+(projectile-global-mode)
+
+(require 'helm-projectile)
+(global-set-key (kbd "M-] f f") 'helm-projectile)
+(global-set-key (kbd "M-] f w") 'helm-projectile-grep)
+;; (global-set-key (kbd "C-x r") 'helm-projectile-rg)
+
+;; C-1 Å°·Î ÇöÀç ÆÄÀÏ¿¡¼­ ºü¸£°Ô Æ¯Á¤ ÇÔ¼ö³ª º¯¼ö·Î ÀÌµ¿ÇÕ´Ï´Ù
+;; (global-set-key (kbd "C-1") 'helm-semantic)
+                                        ;
+;; C-2 Å°·Î find file ÆÄÀÏÀÌ Á¸ÀçÇÏ´ÂÁö °Ë»öÇÕ´Ï´Ù
+;; (global-set-key (kbd "C-2") 'helm-find)
+
+;; C-3 Å°·Î find dir Æú´õ°¡ Á¸ÀçÇÏ´ÂÁö °Ë»öÇÕ´Ï´Ù
+;; (global-set-key (kbd "C-3") 'helm-projectile-find-dir)
+
+
+;;====================================================================================
+;; projecttile & helm-projectile
+;;====================================================================================
+
+;; PACKGE: eyebrowse
+(require 'eyebrowse)
+(eyebrowse-mode t)
+
+(setq eyebrowse-new-workspace t)
+(setq eyebrowse-wrap-around t)
+(setq eyebrowse-switch-back-and-forth t)
+(setq eyebrowse-new-workspace nil)
+(setq eyebrowse-mode-line-style (quote always))
+
+(use-package eyebrowse
+  :diminish eyebrowse-mode
+  :config (progn
+            (define-key eyebrowse-mode-map (kbd "M-1") 'eyebrowse-switch-to-window-config-1)
+            (define-key eyebrowse-mode-map (kbd "M-2") 'eyebrowse-switch-to-window-config-2)
+            (define-key eyebrowse-mode-map (kbd "M-3") 'eyebrowse-switch-to-window-config-3)
+            (define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-4)
+            (eyebrowse-mode t)
+            (setq eyebrowse-new-workspace t)))
+
+
+;;====================================================================================
+;; swiper mode
+;;====================================================================================
+
+;; (require 'swiper)
+;; (global-set-key (kbd "S-C-s") 'swiper-all)
+
+
+;;====================================================================================
+;; iedit 
+;;====================================================================================
+
+;; (require 'iedit)
+;; (eval-after-load "iedit"
+;;    (lambda()
+;;       (define-key iedit-mode-keymap (kbd "C-M-f") 'iedit-toggle-selection)
+;;       ))
+
+;; PACKAGE: iedit
+(require 'iedit)
+;; iedit mode°¡ ½ÃÀÛµÇ°í ½ÇÇàµÇ´Â ÄÚµå
+(eval-after-load "iedit"
+  (lambda()
+    ;; iedit ¸ğµå¿¡¼­ `Å°·Î ¼±ÅÃ ÇØÁ¦¸¦ ÇÕ´Ï´Ù (default: M-;)
+    (define-key iedit-mode-keymap (kbd "q") 'iedit-toggle-selection)
+    (define-key iedit-mode-occurrence-keymap (kbd "q") 'iedit-toggle-selection)
+    ))
+
+;; Alt + [ Å°·Î ¼±ÅÃµÈ ´Ü¾î¸¦ iedit ÀÏ°ıÆíÁıÇÕ´Ï´Ù
+(global-set-key (kbd "M-] i") 'iedit-mode)
+;; ¿ø·¡ C-; °¡ iedit-mode·Î Å°¹ÙÀÎµù µÇ¾îÀÖ´Â °ÍÀ» ÇØÁ¦ÇÕ´Ï´Ù
+(global-set-key (kbd "M-] i") nil)
+
+;;====================================================================================
+;; Comment region
+;;====================================================================================
 
 ;; comment 
 (defun endless/comment-line-or-region (n)
@@ -216,359 +477,217 @@ If region is active, apply to active region instead."
 ;; have that major-mode-specific M-; binding
 (global-set-key (kbd "M-;") #'endless/comment-line-or-region) 
 
-;;====================================================================================
-;; whitespace mode 
-;;====================================================================================
-
-(setq whitespace-display-mappings '(
-  (space-mark   ?\     [?\u00B7]     [?.])
-  (space-mark   ?\xA0  [?\u00A4]     [?_])
-  (newline-mark ?\n    [?Â¶ ?\n])
-  (tab-mark     ?\t    [?\u00BB ?\t] [?\\ ?\t])
-            ))
-
-;; lines lines-tail newline trailing space-before-tab space-afte-tab empty
-;; indentation-space indentation indentation-tab tabs spaces
-(setq whitespace-style '(face space-mark tab-mark newline-mark) )
-
-(setq whitespace-line-column 85)
 
 ;;====================================================================================
-;; swiper mode
+;; tramp 
 ;;====================================================================================
 
-(require 'swiper)
-(global-set-key (kbd "C-f") 'swiper-all)
+;; »ç¿ë¹ı
+;; C-x C-f RET /ftp:skyer9@test.co.kr:
+;; C-x C-f RET /ftp:skyer9@test.co.kr:ÆÄÀÏ¸í
+(require 'tramp)
 
-
-;;====================================================================================
-;; ace window
-;;====================================================================================
-(global-set-key (kbd "M-o") 'ace-window)
-
+;; ÆĞ½º¿öµå¸¦ ÀúÀåÇÑ´Ù.(Emacs ¸¦ Á¾·áÇÏ¸é Áö¿öÁø´Ù.)
+(setq password-cache-expiry nil)
 
 ;;====================================================================================
-;; python with IPython
-;;====================================================================================
-;; (global-set-key (kbd "C-!") 'ein:notebooklist-login)
-
-;; Ctrl + ^í‚¤ë¡œ jupyter notebook ì„œë²„ë¥¼ ì‹¤í–‰í•©ë‹ˆë‹¤
-(global-set-key (kbd "C-^") 'ein:jupyter-server-start)
-
-;; Ctrl + 6í‚¤ë¡œ remote ì ‘ì†ì„ ìœ„í•œ notebooklist-login ëª…ë ¹ì–´ë¥¼ ì„¤ì •í•©ë‹ˆë‹¤
-(global-set-key (kbd "C-6") 'ein:notebooklist-login)
-
-;; jupyter notebookì„ í‚¨ ìƒíƒœì—ì„œ ë¸Œë¼ìš°ì €ê°€ ìë™ìœ¼ë¡œ ì¼œì§€ì§€ ì•Šë„ë¡ ì„¤ì •í•©ë‹ˆë‹¤
-(setq ein:jupyter-server-args (quote ("--no-browser")))
-(setq ein:use-auto-complete t)
-
-;; ein ëª¨ë“œê°€ ì‹¤í–‰ë˜ê³  ë‚œ í›„ ì„¸íŒ…ì— ê´€í•œ ì½”ë“œ
-(eval-after-load "ein"
-  '(progn
-     (ein:ipynb-mode)
-
-     ;; ed: ein ë‹¨ì¶•í‚¤ í•´ì œ
-     (define-key ein:notebook-mode-map (kbd "C-c i") nil)
-     (define-key ein:notebook-mode-map (kbd "H-i") nil)
-     (define-key ein:notebook-mode-map (kbd "C-u") nil)
-     (define-key ein:notebook-mode-map (kbd "C-x C-s") nil)
-     (define-key ein:ipynb-mode-map (kbd "C-c C-o") nil)
-     (define-key ein:ipynb-mode-map (kbd "C-c C-p") nil)
-
-     ;; ed: ein ë‹¨ì¶•í‚¤ ë“±ë¡
-     (define-key ein:notebook-mode-map (kbd "C-w") 'ein:notebook-save-notebook-command)
-     (define-key ein:notebook-mode-map (kbd "C-c C-d") 'ein:worksheet-delete-cell)
-     (define-key ein:notebook-mode-map (kbd "M-<return>") 'ein:worksheet-execute-cell-and-goto-next)
-     ))
-
-;;====================================================================================
-;; LaTex mode
+;; web-mode
 ;;====================================================================================
 
-(setq TeX-command-list
-      (list (list "TeX" "tex \\nonstopmode\\input %t" 'TeX-run-TeX nil t)
-            (list "LaTeX" "%l --interaction=nonstopmode %t" 'TeX-run-LaTeX nil t)
-            (list "LaTeX PDF" "pdflatex --interaction=nonstopmode %t" 'TeX-run-LaTeX nil t)
-            (list "LaTeX DVIPDFMx" "dvipdfmx %d" 'TeX-run-command t nil)
-            (list "View" "%v" 'TeX-run-discard t nil)
-            (list "View PS" "gsview32 %f" 'TeX-run-command t nil)
-            (list "View PDF" "evince %s.pdf" 'TeX-run-command t nil)
-            (list "DVIPS" "dvips %d -o %f" 'TeX-run-command t nil)
-            (list "Print" "dvips %d -o %f " 'TeX-run-command t nil)
-            (list "File" "dvips %d -o %f " 'TeX-run-command t nil)
-            (list "BibTeX" "bibtex %s" 'TeX-run-BibTeX nil nil)
-            (list "Index" "makeindex %s" 'TeX-run-command nil t)
-            (list "Check" "lacheck %s" 'TeX-run-compile nil t)
-            (list "Other" "" 'TeX-run-command t t)))
-(setq TeX-auto-save t
-      TeX-parse-self t)
-;; LaTeX ì»´íŒŒì¼ ë‹¨ì¶•í‚¤
-(add-hook
- 'LaTeX-mode-hook
-  (lambda ()
-    (define-key LaTeX-mode-map [f7] 'do-PDFLaTeX)))
-(setq LaTeX-verbatim-environments '("verbatim" "verbatim*" "Verbatim"))
-(defun do-PDFLaTeX ()
-  "PDFLaTeX the curent file."
-  (interactive)
-  (TeX-command "LaTeX PDF" 'TeX-master-file))
+(require 'web-mode)
+
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+
+(use-package web-mode
+  :custom
+  (web-mode-markup-indent-offset 2)
+  (web-mode-css-indent-offset 2)
+  (web-mode-code-indent-offset 2))
 
 ;;====================================================================================
-;; ispell 
+;; duplicate-things
 ;;====================================================================================
 
-(eval-after-load 'auto-complete
-	'(ac-ispell-setup))
-(add-hook 'text-mode 'ac-ispell-ac-setup)
-(add-hook 'LaTeX-mode 'ac-ispell-ac-setup)
-
-(define-minor-mode my:flyspell-mode
-	"Enable flyspell-mode."
-	:variable my:flyspell-mode
-	(if my:flyspell-mode
-			(progn
-				(if (derived-mode-p 'prog-mode) (flyspell-prog-mode)
-					(flyspell-mode))
-				(if (called-interactively-p) (flyspell-buffer)))
-		(flyspell-mode -1)))
-
-(eval-after-load 'auto-complete
-	'(ac-flyspell-workaround))
+(require 'duplicate-thing)
+(global-set-key (kbd "S-C-l c") 'duplicate-thing)
 
 ;;====================================================================================
-;; LaTex mode
+;; smartparens
 ;;====================================================================================
 
-(setq TeX-command-list
-      (list (list "TeX" "tex \\nonstopmode\\input %t" 'TeX-run-TeX nil t)
-            (list "LaTeX" "%l --interaction=nonstopmode %t" 'TeX-run-LaTeX nil t)
-            (list "LaTeX PDF" "pdflatex --interaction=nonstopmode %t" 'TeX-run-LaTeX nil t)
-            (list "LaTeX DVIPDFMx" "dvipdfmx %d" 'TeX-run-command t nil)
-            (list "View" "%v" 'TeX-run-discard t nil)
-            (list "View PS" "gsview32 %f" 'TeX-run-command t nil)
-            (list "View PDF" "evince %s.pdf" 'TeX-run-command t nil)
-            (list "DVIPS" "dvips %d -o %f" 'TeX-run-command t nil)
-            (list "Print" "dvips %d -o %f " 'TeX-run-command t nil)
-            (list "File" "dvips %d -o %f " 'TeX-run-command t nil)
-            (list "BibTeX" "bibtex %s" 'TeX-run-BibTeX nil nil)
-            (list "Index" "makeindex %s" 'TeX-run-command nil t)
-            (list "Check" "lacheck %s" 'TeX-run-compile nil t)
-            (list "Other" "" 'TeX-run-command t t)))
-(setq TeX-auto-save t
-      TeX-parse-self t)
-;; LaTeX ì»´íŒŒì¼ ë‹¨ì¶•í‚¤
-(add-hook
- 'LaTeX-mode-hook
-  (lambda ()
-    (define-key LaTeX-mode-map [f7] 'do-PDFLaTeX)))
-(setq LaTeX-verbatim-environments '("verbatim" "verbatim*" "Verbatim"))
-(defun do-PDFLaTeX ()
-  "PDFLaTeX the curent file."
-  (interactive)
-  (TeX-command "LaTeX PDF" 'TeX-master-file))
-
-(global-set-key (kbd "<f5>") 'ispell-word)
-;; (with-eval-after-load "ispell"
-;;   (setq ispell-program-name "hunspell")
-;;   (setq ispell-dictionary "en_GB,en_US-med")
-;;   ;; ispell-set-spellchecker-params has to be called
-;;   ;; before ispell-hunspell-add-multi-dic will work
-;;   (ispell-set-spellchecker-params)
-;;   (ispell-hunspell-add-multi-dic "en_GB,en_US-med"))
-(defun flyspell-check-next-highlighted-word ()
-  "Custom function to spell check next highlighted word"
-  (interactive)
-  (flyspell-goto-next-error)
-  (ispell-word))
-(global-set-key (kbd "M-<f5>") 'flyspell-check-next-highlighted-word)
-
-(add-hook 'LaTeX-mode-hook 'flyspell-mode) ;start flyspell-mode
-(setq ispell-dictionary "british")    ;set the default dictionary
-(add-hook 'LaTeX-mode-hook 'ispell)   ;start ispell
-
+(require 'smartparens)
 
 ;;====================================================================================
-;; Eyebrowser
-;;====================================================================;; ================
-
-;; PACKGE: eyebrowse
-(require 'eyebrowse)
-(eyebrowse-mode t)
-
-;; C + 1,2,3ì„ ëˆ„ë¥¼ë•Œë§ˆë‹¤ ì›Œí¬ìŠ¤í…Œì´ì…˜ì„ ìƒì„±í•œë‹¤
-(setq eyebrowse-new-workspace t)
-(setq eyebrowse-wrap-around t)
-(setq eyebrowse-switch-back-and-forth t)
-(setq eyebrowse-new-workspace nil)
-(setq eyebrowse-mode-line-style (quote always))
-
-(use-package eyebrowse
-  :diminish eyebrowse-mode
-  :config (progn
-            (define-key eyebrowse-mode-map (kbd "M-1") 'eyebrowse-switch-to-window-config-1)
-            (define-key eyebrowse-mode-map (kbd "M-2") 'eyebrowse-switch-to-window-config-2)
-            (define-key eyebrowse-mode-map (kbd "M-3") 'eyebrowse-switch-to-window-config-3)
-            (define-key eyebrowse-mode-map (kbd "M-4") 'eyebrowse-switch-to-window-config-4)
-            (eyebrowse-mode t)
-            (setq eyebrowse-new-workspace t)))
-
-
-;;====================================================================================
-;; fill-column-indicator
+;; putty plugin 
 ;;====================================================================================
 
-;; (add-to-list 'load-path "~/.emacs.d/elpa/fill-column-indicator-20171209.1924")
-;; (require 'fill-column-indicator)
-;; (define-globalized-minor-mode
-;;  global-fci-mode fci-mode (lambda () (fci-mode 1)))
-;; (global-fci-mode t)
+(add-to-list 'exec-path "C:/Users/user/AppData/Roaming/.emacs.d/plink.exe")
+
+(when (eq system-type 'windows-nt)
+  (when (executable-find "plink")
+    (require 'tramp)
+    (setq-default tramp-default-method "plink")))
 
 
-;;====================================================================================
+;; =============================================================================
+;; AngeFtp
+;; =============================================================================
+
+
+(defvar ange-ftp-ftp-program-name "C:/Users/user/AppData/Roaming/.emacs.d/my-exe/ftp.exe")
+
+;; (defvar ange-ftp-windows-hosts '("u-startup.kr")
+;;   "List of hosts running a Windows FTP server")
+
+ 
+
+(defun ange-ftp-msdos-dirstyle-off ()
+  "Toggles the dirstyle of the host if listed in the
+  `ange-ftp-windows-hosts' variable. This function is intended to
+  be called from inside the hook `ange-ftp-process-startup-hook'"
+  (if (member host ange-ftp-windows-hosts)
+    (let* ((result (ange-ftp-send-cmd host user '(quote "site dirstyle")))    ;; MSDOS style disabled by "site dirstyle" command
+        (line (cdr result))
+        (ok (car result))
+        (msdos (string-match "200 .+off" line))))))
+
+ 
+
+(add-hook 'ange-ftp-process-startup-hook 'ange-ftp-msdos-dirstyle-off)
+
+
+ 
+
+;==============================================================================
+;; CYGWIN SUPPORT
+;==============================================================================
+
+
+(defvar explicit-shell-file-name)
+
+(let* ((cygwin-root "c:")
+     (cygwin-bin (concat cygwin-root "/bin")))
+  (when (and (eq 'windows-nt system-type)
+     (file-readable-p cygwin-root))
+
+  (setq exec-path (cons cygwin-bin exec-path))
+  (setenv "PATH" (concat cygwin-bin ";" (getenv "PATH")))
+
+  (setq shell-file-name "bash")
+  (setenv "SHELL" shell-file-name)
+  (setq explicit-shell-file-name shell-file-name)
+
+  (add-hook 'comint-output-filter-functions 'comint-strip-ctrl-m)))
+
+
+;==============================================================================
+;; CYGWIN SHELL
+;==============================================================================
+
+
+(add-hook 'shell-mode-hook 'n-shell-mode-hook)
+(defun n-shell-mode-hook ()
+  "12Jan2002 - sailor, shell mode customizations."
+  (local-set-key '[up] 'comint-previous-input)
+  (local-set-key '[down] 'comint-next-input)
+  (setq comint-input-sender 'n-shell-simple-send))
+
+(defun n-shell-simple-send (proc command)
+  "17Jan02 - sailor. Various commands pre-processing before sending to shell."
+  (cond
+   ((string-match "^[ \t]*clear[ \t]*$" command)
+     (comint-send-string proc "\n")
+     (erase-buffer))
+   ((string-match "^[ \t]*c[ \t]*$" command)
+     (comint-send-string proc "\n")
+     (erase-buffer))
+   ;; Send other commands to the default handler.
+   (t (comint-simple-send proc command))))
+
+ 
+
+
+;==============================================================================
+; emacs python 
+;==============================================================================
+
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((python . t)))
+
+
+;; =============================================================================
+;; yasnippet
+;; (ÇÊ¿ä : MELPA, use-package, yasnippet)
+;; =============================================================================
+
+(use-package yasnippet
+  :ensure t)
+
+(yas-global-mode 1)
+
+
+
+;; =============================================================================
 ;; auto-complete
-;;====================================================================================
+;; (ÇÊ¿ä : MELPA, use-package, auto-complete)
+;; =============================================================================
 
-;; (add-to-list 'load-path "~/.emacs.d/elpa/auto-compile-20181230.2216")
-;; (require 'auto-complete)
-;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-;; (require 'auto-complete-config)
-;; (ac-config-default)
-;; (global-auto-complete-mode t)
+(use-package auto-complete
+  :ensure t)
+(require 'auto-complete-config)
 
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (setq jedi:complete-on-dot t)                 ; optional
+;; ÀÚµ¿¿Ï¼º È°¼ºÈ­
+(global-auto-complete-mode t)
 
+;; 3±ÛÀÚ ÀÔ·Â½Ã ÀÚµ¿¿Ï¼º ½ÃÀÛ
+(setq ac-auto-start 5)
 
-;;====================================================================================
-;; iedit 
-;;====================================================================================
+(ac-config-default)
 
-;; (require 'iedit)
-;; (eval-after-load "iedit"
-;; 	(lambda()
-;; 		(define-key iedit-mode-keymap (kbd "C-M-f") 'iedit-toggle-selection)
-;; 		))
-
-;; PACKAGE: iedit
-(require 'iedit)
-;; iedit modeê°€ ì‹œì‘ë˜ê³  ì‹¤í–‰ë˜ëŠ” ì½”ë“œ
-(eval-after-load "iedit"
-  (lambda()
-    ;; iedit ëª¨ë“œì—ì„œ `í‚¤ë¡œ ì„ íƒ í•´ì œë¥¼ í•©ë‹ˆë‹¤ (default: M-;)
-    (define-key iedit-mode-keymap (kbd "q") 'iedit-toggle-selection)
-    (define-key iedit-mode-occurrence-keymap (kbd "q") 'iedit-toggle-selection)
-    ))
-
-;; Alt + [ í‚¤ë¡œ ì„ íƒëœ ë‹¨ì–´ë¥¼ iedit ì¼ê´„í¸ì§‘í•©ë‹ˆë‹¤
-(global-set-key (kbd "C-M-f") 'iedit-mode)
-;; ì›ë˜ C-; ê°€ iedit-modeë¡œ í‚¤ë°”ì¸ë”© ë˜ì–´ìˆëŠ” ê²ƒì„ í•´ì œí•©ë‹ˆë‹¤
-(global-set-key (kbd "C-;") nil)
-
-
-;;====================================================================================
-;; wgrep 
-;;====================================================================================
-
-;; PACKAGE: wgrep
-(require 'wgrep)
-
-;;====================================================================================
-;; projectile 
-;;====================================================================================
-
-(projectile-mode +1)
-(projectile-global-mode)
-;; (setq projectile-keymap-prefix (kbd "C-c C-p"))
-(define-key projectile-mode-map (kbd "C-c C-p") 'projectile-command-map)
-(define-key projectile-mode-map (kbd "C-c d") 'projectile-find-dir)
-(define-key projectile-mode-map (kbd "C-c s") 'projectile-switch-project)
-(define-key projectile-mode-map (kbd "C-c f") 'projectile-find-file)
-(define-key projectile-mode-map (kbd "C-c g") 'projectile-grep)
-
-(require 'helm-projectile)
-(global-set-key (kbd "C-x p") 'helm-projectile)
+;; TAB Å° ´©¸£¸é ÀÚµ¿¿Ï¼º ½ÃÀÛ
+(ac-set-trigger-key "C-<f8>")
 
 
 
+;; =============================================================================
+;; elpy
+;; (ÇÊ¿ä : MELPA, use-package, elpy)
+;; pip install jedi
+;; pip install flake8
+;; pip install importmagic
+;; pip install autopep8
+;; pip install yapf
+;;
+;; elpy °¡ °úµµÇÏ°Ô ¹®¹ıÃ¼Å©¸¦ ÇÑ´Ù°í »ı°¢ÇÏ¸é ¾Æ·¡¿Í °°ÀÌ ¼³Á¤À» º¯°æÇÒ ¼ö ÀÖ´Ù.
+;;
+;; ~/.config/flake8 (À©µµ¿ì´Â ~/.flake8)
+;;
+;; [flake8]
+;; # ignore = E226,E302,E41, E111, W191
+;; ignore = W191
+;; # max-line-length = 160
+;; # exclude = tests/*
+;; # max-complexity = 10
+;; =============================================================================
 
+(use-package elpy
+  :ensure t)
 
+;; elpy È°¼ºÈ­
+(elpy-enable)
 
-;; init.el --- Emacs configuration
+;; some bug??
+(add-to-list 'python-shell-completion-native-disabled-interpreters "python")
 
-;; Set OSX function key as Meta
-
-
-;; INSTALL PACKAGES
-;; --------------------------------------
-
-(require 'package)
-(add-to-list 'package-archives                                                                                                        
-             '("elpy" . "http://jorgenschaefer.github.io/packages/"))   
-(add-to-list 'package-archives
-       '("melpa" . "https://melpa.org/packages/") t)
-
-;; activate all packages
-(package-initialize)
-
-;; fetch the list of packages available 
-(unless package-archive-contents
-  (package-refresh-contents))
-
-;; define list of packages to install
-(defvar myPackages
-  '(better-defaults
-    material-theme
-    exec-path-from-shell
-    elpy))
-
-;; install all packages in list
-(mapc #'(lambda (package)
-    (unless (package-installed-p package)
-      (package-install package)))
-      myPackages)
-
-;; Use shell's $PATH
-(exec-path-from-shell-copy-env "PATH")
-
-;; init.el ends here
-
-
-;;====================================================================================
-;; jedi
-;;====================================================================================
-
-;; (defun company-jedi-setup ()
-;;   (add-to-list 'company-backends 'company-jedi))
-;; (add-hook 'python-mode-hook 'company-jedi-setup)
-
-;; (add-hook 'python-mode-hook 'jedi:setup)
-;; (setq jedi:setup-keys t)
-;; (setq jedi:complete-on-dot t)
-
-
-;; (setq jedi-custom-file (expand-file-name "jedi-custom.el" user-emacs-directory))
-;; (when (file-exists-p jedi-custom-file)
-;;   (load jedi-custom-file))
-
-
-;; ;;====================================================================================
-;; ;; py-autiopep
-;; ;;====================================================================================
-;; (require 'py-autopep8)
-;; (add-hook 'python-mode-hook 'py-autopep8-enable-on-save)
-
-;; (defun company-jedi-hook ()
-;;   (add-to-list 'company-backends 'company-jedi))
-;; (add-hook 'python-mode-hook 'company-jedi-hook)
-
-;; (defun shell-compile ()
-;;       (interactive)
-;;       (shell-command (concat "python " (buffer-file-name)))
-;;       (if (<= (* 2 (window-height)) (frame-height))
-;;           (enlarge-window 20)
-;;         (/ (frame-height) 2)))
-;;     (add-hook 'python-mode-hook
-;;               '(lambda ()
-;;                  (define-key (kbd "C-c C-c") 'shell-compile python-mode-map)))
-
-(add-hook 'python-mode-hook 'helm-gtags-mode)
+(add-hook 'python-mode-hook
+          (lambda ()
+            (setq indent-tabs-mode nil)
+            (setq tab-width 4)
+            (setq python-indent 4)))
