@@ -13,20 +13,52 @@
   '("melpa" . "http://melpa.org/packages/")
   t)  
 (package-initialize)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#323f4e" "#f48fb1" "#53e2ae" "#f1fa8c" "#92b6f4" "#BD99FF" "#79e6f3" "#f8f8f2"])
  '(column-number-mode t)
  '(custom-enabled-themes '(doom-dark+))
  '(custom-safe-themes
-   '("76bfa9318742342233d8b0b42e824130b3a50dcc732866ff8e47366aed69de11" default))
+   '("8f5a7a9a3c510ef9cbb88e600c0b4c53cdcdb502cfe3eb50040b7e13c6f4e78e" "e27556a94bd02099248b888555a6458d897e8a7919fd64278d1f1e8784448941" "79278310dd6cacf2d2f491063c4ab8b129fee2a498e4c25912ddaa6c3c5b621e" "cae81b048b8bccb7308cdcb4a91e085b3c959401e74a0f125e7c5b173b916bf9" "f94110b35f558e4c015b2c680f150bf8a19799d775f8352c957d9d1054b0a210" "5379937b99998e0510bd37ae072c7f57e26da7a11e9fb7bced8b94ccc766c804" "e1ef2d5b8091f4953fe17b4ca3dd143d476c106e221d92ded38614266cea3c8b" "2cdc13ef8c76a22daa0f46370011f54e79bae00d5736340a5ddfe656a767fddf" "4f01c1df1d203787560a67c1b295423174fd49934deb5e6789abd1e61dba9552" "0685ffa6c9f1324721659a9cd5a8931f4bb64efae9ce43a3dba3801e9412b4d8" "ff3c57a5049010a76de8949ddb629d29e2ced42b06098e046def291989a4104a" "56d10d2b60685d112dd54f4ba68a173c102eacc2a6048d417998249085383da1" "4a8d4375d90a7051115db94ed40e9abb2c0766e80e228ecad60e06b3b397acab" "ca70827910547eb99368db50ac94556bbd194b7e8311cfbdbdcad8da65e803be" "e3c64e88fec56f86b49dcdc5a831e96782baf14b09397d4057156b17062a8848" "f2927d7d87e8207fa9a0a003c0f222d45c948845de162c885bf6ad2a255babfd" "4bca89c1004e24981c840d3a32755bf859a6910c65b829d9441814000cf6c3d0" "990e24b406787568c592db2b853aa65ecc2dcd08146c0d22293259d400174e37" "76bfa9318742342233d8b0b42e824130b3a50dcc732866ff8e47366aed69de11" default))
+ '(ein:output-area-inlined-images t)
+ '(fci-rule-color "#364455")
  '(gnutls-algorithm-priority "normal:-vers-tls1.3")
+ '(jdee-db-active-breakpoint-face-colors (cons "#181e26" "#87DFEB"))
+ '(jdee-db-requested-breakpoint-face-colors (cons "#181e26" "#53e2ae"))
+ '(jdee-db-spec-breakpoint-face-colors (cons "#181e26" "#3d4c5f"))
+ '(objed-cursor-color "#f48fb1")
  '(package-selected-packages
-   '(doom-themes elpygen importmagic py-autopep8 py-yapf auto-complete magit pyenv-mode python-mode setup-cygwin cygwin-mount transpose-frame ipython-shell-send elpy smartparens duplicate-thing company-anaconda web-modeess helm-rg helm-projectile projectile ein jupyter pyvenv flycheck-pyflakes live-py-mode company-jedi jedi anaconda-mode swift-mode ace-window matlab-mode yasnippet swiper iedit highlight-indentation flycheck eyebrowse avy anzu))
- '(show-paren-mode t))
+   '(pdf-view-restore wgrep rtags-xref xref dumb-jump dap-mode launch launch-mode undo-tree doom-themes elpygen importmagic py-autopep8 py-yapf auto-complete magit pyenv-mode python-mode setup-cygwin cygwin-mount transpose-frame ipython-shell-send elpy smartparens duplicate-thing company-anaconda web-modeess helm-rg helm-projectile projectile ein jupyter pyvenv flycheck-pyflakes live-py-mode company-jedi jedi anaconda-mode swift-mode ace-window matlab-mode yasnippet swiper iedit highlight-indentation flycheck eyebrowse avy anzu))
+ '(pdf-view-midnight-colors (cons "#f8f8f2" "#323f4e"))
+ '(rustic-ansi-faces
+   ["#323f4e" "#f48fb1" "#53e2ae" "#f1fa8c" "#92b6f4" "#BD99FF" "#79e6f3" "#f8f8f2"])
+ '(show-paren-mode t)
+ '(vc-annotate-background "#323f4e")
+ '(vc-annotate-color-map
+   (list
+    (cons 20 "#53e2ae")
+    (cons 40 "#87eaa2")
+    (cons 60 "#bcf297")
+    (cons 80 "#f1fa8c")
+    (cons 100 "#f1dc83")
+    (cons 120 "#f1bf7a")
+    (cons 140 "#f2a272")
+    (cons 160 "#e09fa1")
+    (cons 180 "#ce9cd0")
+    (cons 200 "#BD99FF")
+    (cons 220 "#cf95e5")
+    (cons 240 "#e192cb")
+    (cons 260 "#f48fb1")
+    (cons 280 "#c67e9c")
+    (cons 300 "#986d88")
+    (cons 320 "#6a5c73")
+    (cons 340 "#364455")
+    (cons 360 "#364455")))
+ '(vc-annotate-very-old-color nil))
 
 ;;------------------------------------------------------------------------------------------
 ;; Basic
@@ -48,6 +80,7 @@
 
 ;; line number
 (global-linum-mode t)
+(setq linum-format "%05d") 
 
 ;; selection
 (transient-mark-mode t)
@@ -77,81 +110,81 @@
 ;; (set-frame-position (selected-frame) 0 0)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
-;;ÆÄÀÏ ÆíÁı À§Ä¡ ±â¾ï
+;;íŒŒì¼ í¸ì§‘ ìœ„ì¹˜ ê¸°ì–µ
 (require 'saveplace)
 (setq-default save-place t)
 (setq save-place-file     "~/_places.sav")
 
-;;ÃÖ±Ù ÆÄÀÏ Á¢±Ù
+;;ìµœê·¼ íŒŒì¼ ì ‘ê·¼
 (require 'recentf)
 (recentf-mode 1)
-(setq recentf-max-menu-items 20) ; ÃÖ±Ù ÆÄÀÏ ¸ñ·Ï ¼ö
+(setq recentf-max-menu-items 20) ; ìµœê·¼ íŒŒì¼ ëª©ë¡ ìˆ˜
 
-;;GUI È¯°æ¿¡¼­ ÁÙ °£°İ Á¶Àı
+;;GUI í™˜ê²½ì—ì„œ ì¤„ ê°„ê²© ì¡°ì ˆ
 (setq-default line-spacing 15)
 
-;;ÆÄÀÏÀÌ ¼öÁ¤µÇ¾úÀ» ¶§ ÀÚµ¿À¸·Î ´Ù½Ã ÀĞ¾îµéÀÌµµ·Ï ÇÏ´Â ¼³Á¤
+;;íŒŒì¼ì´ ìˆ˜ì •ë˜ì—ˆì„ ë•Œ ìë™ìœ¼ë¡œ ë‹¤ì‹œ ì½ì–´ë“¤ì´ë„ë¡ í•˜ëŠ” ì„¤ì •
 (global-auto-revert-mode t)
 
 ;; blanket
 (show-paren-mode 1)
 (setq show-paren-delay 0)
 
-;;ÆÄÀÏ ÆíÁı À§Ä¡ ±â¾ï
+;;íŒŒì¼ í¸ì§‘ ìœ„ì¹˜ ê¸°ì–µ
 ;; (require 'saveplace)
 ;; (setq-default save-place t)
 ;; (setq save-place-file     "~/_places.sav")
 
-;;ÃÖ±Ù ÆÄÀÏ Á¢±Ù
+;;ìµœê·¼ íŒŒì¼ ì ‘ê·¼
 (require 'recentf)
 (recentf-mode 1)
-(setq recentf-max-menu-items 20) ; ÃÖ±Ù ÆÄÀÏ ¸ñ·Ï ¼ö
+(setq recentf-max-menu-items 20) ; ìµœê·¼ íŒŒì¼ ëª©ë¡ ìˆ˜
 
-;;GUI È¯°æ¿¡¼­ ÁÙ °£°İ Á¶Àı
+;;GUI í™˜ê²½ì—ì„œ ì¤„ ê°„ê²© ì¡°ì ˆ
 (setq-default line-spacing 1)
 
-;;ÆÄÀÏÀÌ ¼öÁ¤µÇ¾úÀ» ¶§ ÀÚµ¿À¸·Î ´Ù½Ã ÀĞ¾îµéÀÌµµ·Ï ÇÏ´Â ¼³Á¤
+;;íŒŒì¼ì´ ìˆ˜ì •ë˜ì—ˆì„ ë•Œ ìë™ìœ¼ë¡œ ë‹¤ì‹œ ì½ì–´ë“¤ì´ë„ë¡ í•˜ëŠ” ì„¤ì •
 (global-auto-revert-mode t)
 
-;;ÆäÀÌÁö ³Ñ±æ ¶§ 3ÁÙÀº Æ÷ÇÔ.
+;;í˜ì´ì§€ ë„˜ê¸¸ ë•Œ 3ì¤„ì€ í¬í•¨.
 (setq next-screen-context-lines 3)
 
-;;Ã£±â ±â´É¿¡¼­ ÇÏÀÌ¶óÀÌÆ® ¼³Á¤
+;;ì°¾ê¸° ê¸°ëŠ¥ì—ì„œ í•˜ì´ë¼ì´íŠ¸ ì„¤ì •
 (setq search-highlight t)
 
-;;Àß¶ó³»±â, ºÙ¿©³Ö±â, CTRL+C, V¸¦ È°¼ºÈ­ ½ÃÄÑÁØ´Ù. À©µµ¿ì Ã³·³ »ç¿ë°¡´ÉÇÏ´Ù.
+;;ì˜ë¼ë‚´ê¸°, ë¶™ì—¬ë„£ê¸°, CTRL+C, Vë¥¼ í™œì„±í™” ì‹œì¼œì¤€ë‹¤. ìœˆë„ìš° ì²˜ëŸ¼ ì‚¬ìš©ê°€ëŠ¥í•˜ë‹¤.
 ;; (cua-mode)
 
-;;ÃÖ±Ù ÀÛ¾÷ ÆÄÀÏ ¸ñ·Ï ¿­±â
-(global-set-key [f1] 'recentf-open-files)
+;;ìµœê·¼ ì‘ì—… íŒŒì¼ ëª©ë¡ ì—´ê¸°
+(global-set-key (kbd"M-] f r") 'recentf-open-files)
 
-;ÆÄÀÏ Å½»ö±â Dired ¸ğµå ÄÑ±â
-(global-set-key [f2] 'dired)
+;íŒŒì¼ íƒìƒ‰ê¸° Dired ëª¨ë“œ ì¼œê¸°
+;; (global-set-key "M-] f d" -'dired)
 
-;;ºí·° ¼±ÅÃºÎºĞ »ö»ó ¹İÀü½ÃÅ°±â
+;;ë¸”ëŸ­ ì„ íƒë¶€ë¶„ ìƒ‰ìƒ ë°˜ì „ì‹œí‚¤ê¸°
 (setq-default transient-mark-mode t)
 
-;; ÅÇ ´ë½Å °ø¹é ³Ö±â
+;; íƒ­ ëŒ€ì‹  ê³µë°± ë„£ê¸°
 (setq-default indent-tabs-mode nil)
 
 (defun set-default-programming-style ()
-  ;; ¿£ÅÍ ÀÔ·Â½Ã µé¿©¾²±â
+  ;; ì—”í„° ì…ë ¥ì‹œ ë“¤ì—¬ì“°ê¸°
   (local-set-key (kbd "<return>") 'newline-and-indent)
 
-  ;; ÅÇÅ° ÀÔ·Â½Ã ¿µ¿ªÁöÁ¤µÇ¾î ÀÖÀ¸¸é ¿µ¿ª µé¿©¾²±â. ¿µ¿ª¾øÀ¸¸é ÅÇÅ°.
+  ;; íƒ­í‚¤ ì…ë ¥ì‹œ ì˜ì—­ì§€ì •ë˜ì–´ ìˆìœ¼ë©´ ì˜ì—­ ë“¤ì—¬ì“°ê¸°. ì˜ì—­ì—†ìœ¼ë©´ íƒ­í‚¤.
   (local-set-key (kbd "<tab>") 'indent-block)
 
-  ;; µé¿©¾²±â ÇÒ ¶§ ½ÇÁ¦ ÅÇ¹®ÀÚ ÀÔ·Â
+  ;; ë“¤ì—¬ì“°ê¸° í•  ë•Œ ì‹¤ì œ íƒ­ë¬¸ì ì…ë ¥
   (setq indent-tabs-mode t)
 
-  ;; ÅÇ »çÀÌÁî 4
+  ;; íƒ­ ì‚¬ì´ì¦ˆ 4
   (setq tab-width 4)
 
-  ;; ÁÙ¹øÈ£ Ç¥½Ã
+  ;; ì¤„ë²ˆí˜¸ í‘œì‹œ
   (linum-mode 1)
   )
 
-;; backup files À§Ä¡ ¼±Á¤
+;; backup files ìœ„ì¹˜ ì„ ì •
 (setq
    backup-by-copying t      ; don't clobber symlinks
    backup-directory-alist
@@ -161,15 +194,23 @@
    kept-old-versions 2
    version-control t)       ; use versioned backups
 
-;; ±âº» µğ·ºÅä¸® º¯°æ
+;; ê¸°ë³¸ ë””ë ‰í† ë¦¬ ë³€ê²½
 (setq default-directory "D:/") 
 
-;; ¼³Á¤ ÆÄÀÏ
+;; ì„¤ì • íŒŒì¼
 (global-set-key (kbd "<f10>") (lambda() (interactive)(find-file "~/.emacs")))
 
 ;; buffer font size 
 (global-set-key (kbd "C-M-+") 'text-scale-increase)
 (global-set-key (kbd "C-M--") 'text-scale-decrease)
+
+
+(require 'transpose-frame)
+(global-set-key (kbd "M-] t f") 'transpose-frame)
+
+(global-set-key (kbd "M-] r m") 'rectangle-mark-mode)
+(global-set-key (kbd "M-] r i") 'string-rectangle)
+
 
 
 ;;===========================================================================
@@ -184,12 +225,12 @@
 ;;     (define-key undo-tree-map (kbd "C-r") nil)
 ;;     (define-key undo-tree-map (kbd "C-?") nil)
 
-;;     ;; C-? C-M-? C-/ Å°·Î org-agenda ¸í·ÉÀ» ¼öÇàÇÕ´Ï´Ù
+;;     ;; C-? C-M-? C-/ í‚¤ë¡œ org-agenda ëª…ë ¹ì„ ìˆ˜í–‰í•©ë‹ˆë‹¤
 ;;     (define-key undo-tree-map (kbd "C-?") 'org-agenda-list)
 ;;     (define-key undo-tree-map (kbd "C-M-?") 'org-agenda)
 ;;     (define-key undo-tree-map (kbd "C-/") 'org-todo-list)
 
-;;     ;; C-_ Å°·Î font Å©±â¸¦ Æ¯Á¤ Å©±â·Î ¸ÂÃçÁÖ´Â ÇÔ¼ö ¼³Á¤
+;;     ;; C-_ í‚¤ë¡œ font í¬ê¸°ë¥¼ íŠ¹ì • í¬ê¸°ë¡œ ë§ì¶°ì£¼ëŠ” í•¨ìˆ˜ ì„¤ì •
 ;;     (define-key undo-tree-map (kbd "C-_") 'set-frame-125)
 
 ;;     ))
@@ -200,11 +241,11 @@
 ;;===========================================================================
 
 ;; Package: yasnippet
-;; ~/.emacs.d/elpa/yasnippet-.../snippets ¿¡ ÀÖ´Â ÆÄÀÏµéÀ» ~/.emacs.d/snippets ¿¡ ³Ö¾î¾ß Á¤»óÀûÀ¸·Î µ¿ÀÛÇÕ´Ï´Ù
+;; ~/.emacs.d/elpa/yasnippet-.../snippets ì— ìˆëŠ” íŒŒì¼ë“¤ì„ ~/.emacs.d/snippets ì— ë„£ì–´ì•¼ ì •ìƒì ìœ¼ë¡œ ë™ì‘í•©ë‹ˆë‹¤
 (require 'yasnippet)
 (yas-global-mode t)
 (setq warning-suppress-types nil)
-;; yasnippet¿¡ elisp ÇÔ¼ö¸¦ ¾²¸é ³ªÅ¸³ª´Â °æ°í¹®À» ¹«½ÃÇÕ´Ï´Ù
+;; yasnippetì— elisp í•¨ìˆ˜ë¥¼ ì“°ë©´ ë‚˜íƒ€ë‚˜ëŠ” ê²½ê³ ë¬¸ì„ ë¬´ì‹œí•©ë‹ˆë‹¤
 (add-to-list 'warning-suppress-types '(yasnippet backquote-change)) 
 
 
@@ -213,13 +254,13 @@
 ;;===========================================================================
 
 ;; PACKAGE: anzu
-(require 'anzu)
-(global-anzu-mode)
+;; (require 'anzu)
+;; (global-anzu-mode)
 
-;; M-% Å°·Î ÇØ´ç buffer¿¡¼­ Æ¯Á¤ ´Ü¾î¸¦ ¹Ù²ß´Ï´Ù
-(global-set-key (kbd "M-] r") 'anzu-query-replace)
-;; C-M-% Å°·Î Á¤±ÔÇ¥Çö½ÄÀ» ÀÌ¿ëÇÑ ´Ü¾îÄ¡È¯À» ÇÕ´Ï´Ù
-(global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
+;; M-% í‚¤ë¡œ í•´ë‹¹ bufferì—ì„œ íŠ¹ì • ë‹¨ì–´ë¥¼ ë°”ê¿‰ë‹ˆë‹¤
+;; (global-set-key (kbd "M-%") 'anzu-query-replace)
+;; ;; C-M-% í‚¤ë¡œ ì •ê·œí‘œí˜„ì‹ì„ ì´ìš©í•œ ë‹¨ì–´ì¹˜í™˜ì„ í•©ë‹ˆë‹¤
+;; (global-set-key (kbd "C-M-%") 'anzu-query-replace-regexp)
 
 
 ;; PACKAGE : flycheck
@@ -227,19 +268,38 @@
 
 ;; swiper
 (require 'swiper)
-(global-set-key (kbd "M-] s") 'swiper-all)
+(global-set-key (kbd "M-] s s") 'swiper)
+(global-set-key (kbd "M-] s a") 'swiper-all)
 
-;; PACKAGE: avy
+;; ;; PACKAGE: avy
 (require 'avy)
 (global-set-key (kbd "M-] a w") 'avy-goto-word-1)
 (global-set-key (kbd "M-] a c") 'avy-goto-char-2)
-(global-set-key (kbd "M-] a l") 'avy-goto-line)
+;; (global-set-key (kbd "M-] a l") 'avy-goto-line)
+
 
 ;; PACKGE: eyebrowse
 (require 'eyebrowse)
 (eyebrowse-mode t)
 
 (require 'highlight-indentation)
+
+;; PACKAGE: iedit
+(require 'iedit)
+;; iedit modeê°€ ì‹œì‘ë˜ê³  ì‹¤í–‰ë˜ëŠ” ì½”ë“œ
+(eval-after-load "iedit"
+  (lambda()
+    ;; iedit ëª¨ë“œì—ì„œ `í‚¤ë¡œ ì„ íƒ í•´ì œë¥¼ í•©ë‹ˆë‹¤ (default: M-;)
+    (define-key iedit-mode-keymap (kbd "q") 'iedit-istoggle-selection)
+    (define-key iedit-mode-occurrence-keymap (kbd "q") 'iedit-toggle-selection)
+    ))
+
+;; Alt + [ í‚¤ë¡œ ì„ íƒëœ ë‹¨ì–´ë¥¼ iedit ì¼ê´„í¸ì§‘í•©ë‹ˆë‹¤
+(global-set-key (kbd "M-] i") 'iedit-mode)
+;; ì›ë˜ C-; ê°€ iedit-modeë¡œ í‚¤ë°”ì¸ë”© ë˜ì–´ìˆëŠ” ê²ƒì„ í•´ì œí•©ë‹ˆë‹¤
+;; (global-set-key (kbd "C-;") nil)
+
+
 
 ;;------------------------------------------------------------------------------------------
 ;; ace window
@@ -256,22 +316,21 @@
 (global-set-key (kbd "S-C-<down>")    'enlarge-window)
 
 
-
 ;;------------------------------------------------------------------------------------------
 ;; matlab
 ;;------------------------------------------------------------------------------------------
 
-(setq matlab-shell-command "C:/Program Files/MATLAB/R2019b/matlabShell")
-(setq matlab-shell-command-switches (list "-nodesktop"))
+;; (setq matlab-shell-command "C:/Program Files/MATLAB/R2019b/matlabShell")
+;; (setq matlab-shell-command-switches (list "-nodesktop"))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  )
 
-(add-hook 'matlab-mode-hook 'turn-off-auto-fill)
+;; (add-hook 'matlab-mode-hook 'turn-off-auto-fill)
 
 ;;====================================================================================
 ;; whitespace mode 
@@ -281,76 +340,128 @@
 ;; (add-hook 'after-init-hook 'whitespace-mode)
 (global-whitespace-mode t)
 
-(setq whitespace-display-mappings '(
-  (space-mark   ?\     [?\u00B7]     [?.])
-  (space-mark   ?\xA0  [?\u00A4]     [?_])
-  (newline-mark ?\n    [?¢Ò ?\n])
-  (tab-mark     ?\t    [?\u00BB ?\t] [?\\ ?\t])
-            ))
+;; make whitespace-mode use just basic coloring
+;;(setq whitespace-style (quote (spaces tabs newline space-mark tab-mark newline-mark)))
+;; (setq whitespace-display-mappings
+;;   ;; all numbers are Unicode codepoint in decimal. â– (insert-char 182 1)
+;;   '(
+;;     (space-mark 32 [183] [46]) ; 32 SPACE ã€Œ ã€, 183 MIDDLE DOT ã€ŒÂ·ã€, 46 FULL STOP ã€Œ.ã€
+;;     (newline-mark 10 [182 10]) ; 10 LINE FEED
+;;     (tab-mark 9 [9655 9] [92 9]) ; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE ã€Œâ–·ã€
+;;     ))
+
+;; (setq whitespace-display-mappings '(
+;;   (space-mark   ?\     [?\u00B7]     [?.])
+;;   (space-mark   ?\xA0  [?\u00A4]     [?_])
+;;   (newline-mark ?\n    [?Â¶ ?\n])
+;;   (tab-mark     ?\t    [?\u00BB ?\t] [?\\ ?\t])
+;;             ))
+
+;; (setq whitespace-display-mappings
+;;   '(
+;;     (space-mark 32 [183] [46]) ; 32 SPACE ã€Œ ã€, 183 MIDDLE DOT ã€ŒÂ·ã€, 46 FULL STOP ã€Œ.ã€
+;;     (newline-mark 10 [182 10]) ; 10 LINE FEED
+;;     (tab-mark 9 [9655 9] [92 9]) ; 9 TAB, 9655 WHITE RIGHT-POINTING TRIANGLE ã€Œâ–·ã€
+;;     ))
+
 
 ;; lines lines-tail newline trailing space-before-tab space-afte-tab empty
 ;; indentation-space indentation indentation-tab tabs spaces
-(setq whitespace-style '(face space-mark tab-mark newline-mark) )
+;; (setq whitespace-style '(face space-mark tab-mark newline-mark) )
+;; (setq whitespace-line-column 85)
+;; (setq whitespace-space-regexp "^\\( \\{4,\\}\\)")
+;; make whitespace-mode use just basic coloring
+;;(setq whitespace-style (quote (spaces tabs newline space-mark tab-mark newline-mark)))
 
-(setq whitespace-line-column 85)
 
 ;;====================================================================================
 ;; Anaconda mode
-;; ½ÇÇà¹æ¹ı: C-c C-p C-p C-p
+;; ì‹¤í–‰ë°©ë²•: C-c C-p C-p C-p
 ;;====================================================================================
 
-(add-hook 'python-mode-hook 'anaconda-mode)
+;; (setq python-shell-interpreter "d:/anaconda3/envs/test_envs/python.exe")
+
+;; (use-package pyvenv
+;;         :ensure t
+;;         :init
+;;         (setenv "test_env" "D:/Aanaconda/envs")
+;;         (pyvenv-mode 1)
+;;         (pyvenv-tracking-mode 1))
+
+;; (pyvenv-activate (expand-file-name "~/anaconda/envs/py27"))
 
 
-(setq python-shell-interpreter "D:/Anaconda/envs/test_env/python.exe")
+;; (add-hook 'python-mode-hook 'anaconda-mode)
 
-(use-package pyvenv
-        :ensure t
-        :init
-        (setenv "test_env" "D:/Aanaconda/envs")
-        (pyvenv-mode 1)
-        (pyvenv-tracking-mode 1))
-
-;; (pyvenv-activate (expand-file-name "~/anaconda/envs/py27")) 
+;; (global-set-key (kbd "C-c C-c") (kbd "C-u C-c C-c"))
+;; (global-set-key (kbd "M-] p d") (kbd "C-c C-d"))
 
 
+;; (add-hook 'shell-mode-hook 'n-shell-mode-hook)
+;; (defun n-shell-mode-hook ()
+;;   "12Jan2002 - sailor, shell mode customizations."
+;;   (local-set-key '[up] 'comint-previous-input)
+;;   (local-set-key '[down] 'comint-next-input)
+;;   (setq comint-input-sender 'n-shell-simple-send))
+
+(add-hook 'python-mode-hook 'n-python-mode-hook)
+(defun n-python-mode-hook ()
+          (local-set-key (kbd "C-c C-c") (kbd "C-u C-c C-c")))
+          ;; (global-set-key (kbd "M-] p d") (kbd "C-c C-d")))
 
 ;;====================================================================================
 ;; Bookmark
 ;;====================================================================================
 
-;; ;;ºÏ ¸¶Å© ¿­±â
-(global-set-key (kbd "C-M-b") 'bookmark-bmenu-list)
-
-;; ;;ºÏ ¸¶Å©¿¡ ÀúÀå ÇÏ±â
-;; (global-set-key "C-b C-s" 'bookmark-set)
-
-;;ºÏ ¸¶Å©¿¡ ÀúÀå ÇÏ±â Alt + b
-(global-set-key (kbd "C-M-s") 'bookmark-set)
-
-;; ºÏ¸¶Å© »èÁ¦ Ctrl + Alt + b
-(global-set-key (kbd "C-M-d") 'bookmark-delete)
-
-;;ºÏ ¸¶Å© ¿­±â Alt + v
-(global-set-key (kbd "C-M-j") 'bookmark-jump)
-;; (define-key cua--cua-keys-keymap (kbd "C-M-v") 'bookmark-jump) 
+;; ;;ë¶ ë§ˆí¬ ì—´ê¸°
+(global-set-key (kbd "M-] b o") 'bookmark-bmenu-list)
+(global-set-key (kbd "M-] b s") 'bookmark-set)
+(global-set-key (kbd "M-] b d") 'bookmark-delete)
+(global-set-key (kbd "M-] b j") 'bookmark-jump)
  
 
 ;;====================================================================================
 ;; Jupyter notebook
-;; ½ÇÇà¹æ¹ı: ein:notebooklist-open (´Ü, ÀÌÀü¿¡ terminal ¿¡¼­ jupyter notebook À» ¼öÇàÇÑ ÈÄ) 
+;; ì‹¤í–‰ë°©ë²•: ein:notebooklist-open (ë‹¨, ì´ì „ì— terminal ì—ì„œ jupyter notebook ì„ ìˆ˜í–‰í•œ í›„) 
 ;;====================================================================================
 
 (require 'ein)
-(require 'ein-notebook)
+(eyebrowse-mode t)
+;; (require 'ein-notebook)
 ;; (require 'ein-subpackages)              ;
 
-;; (global-set-key (kbd "C-M-e") 'ein:notebook-open)
-(global-set-key (kbd "C-M-1") 'ein:jupyter-server-stop)
-(global-set-key (kbd "C-M-2") 'ein:jupyter-server-start)
+(setq ein:use-auto-complete t)
+(setq ein:complete-on-dot t)
+(setq ein:completion-backend 'ein:use-company-backend)
+(setq ein:use-auto-complete-superpack nil)
+(setq ein:use-smartrep nil)
 
-(define-key ein:notebook-mode-map "\C-c\C-d"
-            'ein:worksheet-delete-cell)
+  ;; (setq ein:use-auto-complete t)
+  ;; (setq ein:complete-on-dot t)
+  ;; (setq ein:completion-backend 'ein:use-company-backend)
+  ;; (setq ein:use-auto-complete-superpack nil)
+;; (setq ein:use-smartrep nil)
+
+;; (use-package ein
+;;   :config
+;;   (setq ein:use-auto-complete t)
+;;   (setq ein:complete-on-dot t)
+;;   (setq ein:completion-backend 'ein:use-company-backend)
+;;   (setq ein:use-auto-complete-superpack nil)
+;;   (setq ein:use-smartrep nil)
+;; )
+
+;; (require 'ein)
+;; (setq ein:use-auto-complete t)
+;; (setq ein:use-smartrep t)
+
+(global-set-key (kbd "M-] m j") 'ein:jupyter-server-start)
+(global-set-key (kbd "M-] e e") 'ein:jupyter-server-stop)
+
+
+;; (define-key ein:notebook-mode-map "\C-c\C-d"
+;;             'ein:worksheet-delete-cell)
+
 
 ;;====================================================================================
 ;; company-mode
@@ -365,19 +476,21 @@
 (require 'projectile)
 (projectile-global-mode)
 
+(setq projectile-switch-project-action 'projectile-dired)
+
 (require 'helm-projectile)
 (global-set-key (kbd "M-] f f") 'helm-projectile)
 (global-set-key (kbd "M-] f w") 'helm-projectile-grep)
-;; (global-set-key (kbd "C-x r") 'helm-projectile-rg)
+;; (global-set-key (kbd "M-] f r") 'helm-projectile-rg)
 
-;; C-1 Å°·Î ÇöÀç ÆÄÀÏ¿¡¼­ ºü¸£°Ô Æ¯Á¤ ÇÔ¼ö³ª º¯¼ö·Î ÀÌµ¿ÇÕ´Ï´Ù
-;; (global-set-key (kbd "C-1") 'helm-semantic)
+;; C-1 í‚¤ë¡œ í˜„ì¬ íŒŒì¼ì—ì„œ ë¹ ë¥´ê²Œ íŠ¹ì • í•¨ìˆ˜ë‚˜ ë³€ìˆ˜ë¡œ ì´ë™í•©ë‹ˆë‹¤
+;; (global-set-key (kbd "M-] h s") 'helm-semantic)
                                         ;
-;; C-2 Å°·Î find file ÆÄÀÏÀÌ Á¸ÀçÇÏ´ÂÁö °Ë»öÇÕ´Ï´Ù
-;; (global-set-key (kbd "C-2") 'helm-find)
+;; C-2 í‚¤ë¡œ find file íŒŒì¼ì´ ì¡´ì¬í•˜ëŠ”ì§€ ê²€ìƒ‰í•©ë‹ˆë‹¤
+;; (global-set-key (kbd "M-] f f") 'helm-find)  
 
-;; C-3 Å°·Î find dir Æú´õ°¡ Á¸ÀçÇÏ´ÂÁö °Ë»öÇÕ´Ï´Ù
-;; (global-set-key (kbd "C-3") 'helm-projectile-find-dir)
+;; C-3 í‚¤ë¡œ find dir í´ë”ê°€ ì¡´ì¬í•˜ëŠ”ì§€ ê²€ìƒ‰í•©ë‹ˆë‹¤
+;; (global-set-key (kbd "M-]  3") 'helm-projectile-find-dir)
 
 
 ;;====================================================================================
@@ -404,39 +517,6 @@
             (eyebrowse-mode t)
             (setq eyebrowse-new-workspace t)))
 
-
-;;====================================================================================
-;; swiper mode
-;;====================================================================================
-
-;; (require 'swiper)
-;; (global-set-key (kbd "S-C-s") 'swiper-all)
-
-
-;;====================================================================================
-;; iedit 
-;;====================================================================================
-
-;; (require 'iedit)
-;; (eval-after-load "iedit"
-;;    (lambda()
-;;       (define-key iedit-mode-keymap (kbd "C-M-f") 'iedit-toggle-selection)
-;;       ))
-
-;; PACKAGE: iedit
-(require 'iedit)
-;; iedit mode°¡ ½ÃÀÛµÇ°í ½ÇÇàµÇ´Â ÄÚµå
-(eval-after-load "iedit"
-  (lambda()
-    ;; iedit ¸ğµå¿¡¼­ `Å°·Î ¼±ÅÃ ÇØÁ¦¸¦ ÇÕ´Ï´Ù (default: M-;)
-    (define-key iedit-mode-keymap (kbd "q") 'iedit-toggle-selection)
-    (define-key iedit-mode-occurrence-keymap (kbd "q") 'iedit-toggle-selection)
-    ))
-
-;; Alt + [ Å°·Î ¼±ÅÃµÈ ´Ü¾î¸¦ iedit ÀÏ°ıÆíÁıÇÕ´Ï´Ù
-(global-set-key (kbd "M-] i") 'iedit-mode)
-;; ¿ø·¡ C-; °¡ iedit-mode·Î Å°¹ÙÀÎµù µÇ¾îÀÖ´Â °ÍÀ» ÇØÁ¦ÇÕ´Ï´Ù
-(global-set-key (kbd "M-] i") nil)
 
 ;;====================================================================================
 ;; Comment region
@@ -482,12 +562,12 @@ If region is active, apply to active region instead."
 ;; tramp 
 ;;====================================================================================
 
-;; »ç¿ë¹ı
+;; ì‚¬ìš©ë²•
 ;; C-x C-f RET /ftp:skyer9@test.co.kr:
-;; C-x C-f RET /ftp:skyer9@test.co.kr:ÆÄÀÏ¸í
+;; C-x C-f RET /ftp:skyer9@test.co.kr:íŒŒì¼ëª…
 (require 'tramp)
 
-;; ÆĞ½º¿öµå¸¦ ÀúÀåÇÑ´Ù.(Emacs ¸¦ Á¾·áÇÏ¸é Áö¿öÁø´Ù.)
+;; íŒ¨ìŠ¤ì›Œë“œë¥¼ ì €ì¥í•œë‹¤.(Emacs ë¥¼ ì¢…ë£Œí•˜ë©´ ì§€ì›Œì§„ë‹¤.)
 (setq password-cache-expiry nil)
 
 ;;====================================================================================
@@ -515,7 +595,7 @@ If region is active, apply to active region instead."
 ;;====================================================================================
 
 (require 'duplicate-thing)
-(global-set-key (kbd "S-C-l c") 'duplicate-thing)
+(global-set-key (kbd "M-] l c") 'duplicate-thing)
 
 ;;====================================================================================
 ;; smartparens
@@ -610,7 +690,6 @@ If region is active, apply to active region instead."
    ;; Send other commands to the default handler.
    (t (comint-simple-send proc command))))
 
- 
 
 
 ;==============================================================================
@@ -624,7 +703,7 @@ If region is active, apply to active region instead."
 
 ;; =============================================================================
 ;; yasnippet
-;; (ÇÊ¿ä : MELPA, use-package, yasnippet)
+;; (í•„ìš” : MELPA, use-package, yasnippet)
 ;; =============================================================================
 
 (use-package yasnippet
@@ -636,38 +715,38 @@ If region is active, apply to active region instead."
 
 ;; =============================================================================
 ;; auto-complete
-;; (ÇÊ¿ä : MELPA, use-package, auto-complete)
+;; (í•„ìš” : MELPA, use-package, auto-complete)
 ;; =============================================================================
 
 (use-package auto-complete
   :ensure t)
 (require 'auto-complete-config)
 
-;; ÀÚµ¿¿Ï¼º È°¼ºÈ­
+;; ìë™ì™„ì„± í™œì„±í™”
 (global-auto-complete-mode t)
 
-;; 3±ÛÀÚ ÀÔ·Â½Ã ÀÚµ¿¿Ï¼º ½ÃÀÛ
+;; 3ê¸€ì ì…ë ¥ì‹œ ìë™ì™„ì„± ì‹œì‘
 (setq ac-auto-start 5)
 
 (ac-config-default)
 
-;; TAB Å° ´©¸£¸é ÀÚµ¿¿Ï¼º ½ÃÀÛ
+;; TAB í‚¤ ëˆ„ë¥´ë©´ ìë™ì™„ì„± ì‹œì‘
 (ac-set-trigger-key "C-<f8>")
 
 
 
 ;; =============================================================================
 ;; elpy
-;; (ÇÊ¿ä : MELPA, use-package, elpy)
+;; (í•„ìš” : MELPA, use-package, elpy)
 ;; pip install jedi
 ;; pip install flake8
 ;; pip install importmagic
 ;; pip install autopep8
 ;; pip install yapf
 ;;
-;; elpy °¡ °úµµÇÏ°Ô ¹®¹ıÃ¼Å©¸¦ ÇÑ´Ù°í »ı°¢ÇÏ¸é ¾Æ·¡¿Í °°ÀÌ ¼³Á¤À» º¯°æÇÒ ¼ö ÀÖ´Ù.
+;; elpy ê°€ ê³¼ë„í•˜ê²Œ ë¬¸ë²•ì²´í¬ë¥¼ í•œë‹¤ê³  ìƒê°í•˜ë©´ ì•„ë˜ì™€ ê°™ì´ ì„¤ì •ì„ ë³€ê²½í•  ìˆ˜ ìˆë‹¤.
 ;;
-;; ~/.config/flake8 (À©µµ¿ì´Â ~/.flake8)
+;; ~/.config/flake8 (ìœˆë„ìš°ëŠ” ~/.flake8)
 ;;
 ;; [flake8]
 ;; # ignore = E226,E302,E41, E111, W191
@@ -680,7 +759,7 @@ If region is active, apply to active region instead."
 (use-package elpy
   :ensure t)
 
-;; elpy È°¼ºÈ­
+;; elpy í™œì„±í™”
 (elpy-enable)
 
 ;; some bug??
@@ -691,3 +770,191 @@ If region is active, apply to active region instead."
             (setq indent-tabs-mode nil)
             (setq tab-width 4)
             (setq python-indent 4)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Courier New" :foundry "outline" :slant normal :weight normal :height 120 :width normal))))
+ '(whitespace-space ((t (:foreground "#4b474c")))))
+
+;; (setq
+;;  python-shell-interpreter "ipython"
+;;  python-shell-interpreter-args "--colors=Linux --profile=default"
+;;  python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+;;  python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+;;  python-shell-completion-setup-code
+;;  "from IPython.core.completerlib import module_completion"
+;;  python-shell-completion-module-string-code
+;;  "';'.join(module_completion('''%s'''))\n"
+;;  python-shell-completion-string-code
+;;  "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
+
+; use IPython
+(setq-default py-shell-name "ipython")
+(setq-default py-which-bufname "IPython")
+; use the wx backend, for both mayavi and matplotlib
+(setq py-python-command-args
+  '("--gui=wx" "--pylab=wx" "-colors" "Linux"))
+(setq py-force-py-shell-name-p t)
+ 
+; switch to the interpreter after executing code
+(setq py-shell-switch-buffers-on-execute-p t)
+(setq py-switch-buffers-on-execute-p t)
+; don't split windows
+(setq py-split-windows-on-execute-p nil)
+; try to automagically figure out indentation
+(setq py-smart-indentation t)
+
+;; =============================================================================
+;; ROS xml mode
+;; =============================================================================
+
+; roslaunch highlighting
+(add-to-list 'auto-mode-alist '("\\.launch$" . xml-mode))
+
+
+
+(add-hook 'dap-stopped-hook
+          (lambda (arg) (call-interactively #'dap-hydra)))
+
+
+;; =============================================================================
+;; magit
+;; =============================================================================
+
+
+(require 'magit)
+
+;; (í•„ìš” : https://git-scm.com/)
+(when (eq system-type 'windows-nt)
+  (add-to-list 'exec-path "D:/Git/bin/")
+  (setenv "PATH" (concat "D:/Git/bin/" ";" (getenv "PATH")))
+  (setq magit-git-executable "D:/Git/bin/git.exe"))
+
+;; ì•„ë˜ í•œì¤„ì„ ì„¤ì •íŒŒì¼ì— ì¶”ê°€í•˜ê³ , í¸ì§‘í•  íŒŒì¼ì„ UTF8 ë¡œ ì¸ì½”ë”©í•˜ëŠ”ê²Œ 100ë°° í¸í•˜ë‹¤.
+;;
+;; (prefer-coding-system 'utf-8)
+;;
+;; ê·¸ê²Œ ì•ˆë ë•ŒëŠ” ì•„ë˜ ì„¤ì •ìœ¼ë¡œ ëŒ€ì²˜í•œë‹¤.
+(add-to-list 'process-coding-system-alist '("git" utf-8 . utf-8))
+(add-hook 'git-commit-mode-hook
+          '(lambda ()
+             (set-buffer-file-coding-system 'utf-8)))
+(add-hook 'magit-diff-mode-hook
+          '(lambda ()
+             (make-local-variable 'process-coding-system-alist)
+             (setq process-coding-system-alist (remove '("git" utf-8 . utf-8) process-coding-system-alist))))
+
+(add-hook 'dired-mode-hook
+          (lambda ()
+            (define-key dired-mode-map (kbd "M-] m s") 'magit-status)
+            (define-key dired-mode-map (kbd "M-] m l") 'magit-log)
+            (define-key dired-mode-map (kbd "M-] m p") 'magit-push)
+            (define-key dired-mode-map (kbd "M-] m u") 'magit-pull)))
+
+(eval-after-load 'magit
+  '(progn
+     ;; C-u C-x = ë¥¼ ì…ë ¥í•˜ë©´ ì»¤ì„œ ìœ„ì¹˜ì˜ face ë¥¼ ì•Œì•„ë‚¼ ìˆ˜ ìˆë‹¤.
+     (set-face-foreground 'magit-diff-added "black")
+     (set-face-foreground 'magit-diff-added-highlight "black")
+     (set-face-background 'magit-diff-added-highlight (face-attribute 'magit-diff-added :background))
+     (set-face-foreground 'magit-diff-removed "black")
+     (set-face-foreground 'magit-diff-removed-highlight "black")
+     (set-face-background 'magit-diff-removed-highlight (face-attribute 'magit-diff-removed :background))
+     (set-face-foreground 'magit-diff-context "black")
+     (set-face-background 'magit-diff-context "white")
+     (set-face-foreground 'magit-diff-context-highlight "black")
+     (set-face-background 'magit-diff-context-highlight "white")
+     (set-face-foreground 'magit-section-highlight "black")
+     (set-face-background 'magit-section-highlight "DarkSeaGreen2")
+     (set-face-background 'magit-diff-hunk-heading "gray92")
+     (set-face-background 'magit-diff-hunk-heading-highlight "gray92")
+     (set-face-foreground 'magit-hash "firebrick")))
+
+(setq magit-diff-refine-hunk 'all)
+
+;; ê³µë°±ë¬¸ì ì°¨ì´ í‘œì‹œ
+(setq smerge-refine-ignore-whitespace nil)
+
+
+;; (use-package dumb-jump
+;;   :bind (("M-g o" . dumb-jump-go-other-window)
+;;          ("M-g j" . dumb-jump-go)
+;;          ("M-g x" . dumb-jump-go-prefer-external)
+;;          ("M-g z" . dumb-jump-go-prefer-external-other-window))
+;;   :config (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
+;;   :ensure)
+
+;; :config
+;; ;; (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
+;; :init
+;; (dumb-jump-mode)
+;; :ensure
+;; )
+
+
+
+(add-to-list 'xref-backend-functions 'dumb-jump-xref-activate t)
+
+
+;; (use-package elpy
+  ;; :ensure t
+  ;; :init
+  ;; (elpy-enable))
+
+
+
+;==============================================================================
+;; cc mode
+;==============================================================================
+
+(require 'cc-mode)
+
+ 
+
+; set k&r style
+;; ì°¸ê³  : http://davidha.wordpress.com/2009/05/15/emacs-cc-modes-built-in-styles-gallery/
+;;(setq c-default-style "k&r")
+
+(setq c-default-style "stroustrup")
+
+ 
+
+;; ë“¤ì—¬ì“°ê¸°
+(define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
+
+ 
+
+(add-hook 'c-mode-common-hook
+  (lambda ()
+    ;; ì»´íŒŒì¼ ê´€ë ¨ ë‹¨ì¶•í‚¤
+    (local-set-key [f5] 'recompile)
+    (local-set-key [C-f5] 'compile)
+    ;; íƒ­í‚¤ ì„¤ì •
+    (local-set-key (kbd "<tab>") 'indent-block)
+    (setq indent-tabs-mode t)
+    (setq tab-width 4)
+    ))
+
+ 
+
+(setq auto-mode-alist
+  (append
+    '(("\\.C$"    . c++-mode)
+      ("\\.H$"    . c++-mode)
+      ("\\.cc$"   . c++-mode)
+      ("\\.cpp$"  . c++-mode)
+      ("\\.hh$"   . c++-mode)
+      ("\\.c$"    . c-mode)
+      ("\\.h$"    . c-mode)
+      ("\\.m$"    . objc-mode)
+      ("\\.java$" . java-mode)
+     ) auto-mode-alist))
+
+
+;==============================================================================
+;; treeemacs
+;==============================================================================
+
+(global-set-key (kbd "M-] m t") 'treemacs)
