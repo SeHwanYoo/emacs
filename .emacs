@@ -32,7 +32,7 @@
  '(jdee-db-spec-breakpoint-face-colors (cons "#181e26" "#3d4c5f"))
  '(objed-cursor-color "#f48fb1")
  '(package-selected-packages
-   '(pdf-view-restore wgrep rtags-xref xref dumb-jump dap-mode launch launch-mode undo-tree doom-themes elpygen importmagic py-autopep8 py-yapf auto-complete magit pyenv-mode python-mode setup-cygwin cygwin-mount transpose-frame ipython-shell-send elpy smartparens duplicate-thing company-anaconda web-modeess helm-rg helm-projectile projectile ein jupyter pyvenv flycheck-pyflakes live-py-mode company-jedi jedi anaconda-mode swift-mode ace-window matlab-mode yasnippet swiper iedit highlight-indentation flycheck eyebrowse avy anzu))
+   '(helm-lsp lsp-ui which-key lsp-python-ms lsp-mode pdf-view-restore wgrep rtags-xref xref dumb-jump dap-mode launch launch-mode undo-tree doom-themes elpygen importmagic py-autopep8 py-yapf auto-complete magit pyenv-mode python-mode setup-cygwin cygwin-mount transpose-frame ipython-shell-send elpy smartparens duplicate-thing company-anaconda web-modeess helm-rg helm-projectile projectile ein jupyter pyvenv flycheck-pyflakes live-py-mode company-jedi jedi anaconda-mode swift-mode ace-window matlab-mode yasnippet swiper iedit highlight-indentation flycheck eyebrowse avy anzu))
  '(pdf-view-midnight-colors (cons "#f8f8f2" "#323f4e"))
  '(rustic-ansi-faces
    ["#323f4e" "#f48fb1" "#53e2ae" "#f1fa8c" "#92b6f4" "#BD99FF" "#79e6f3" "#f8f8f2"])
@@ -379,34 +379,9 @@
 ;; 실행방법: C-c C-p C-p C-p
 ;;====================================================================================
 
-;; (setq python-shell-interpreter "d:/anaconda3/envs/test_envs/python.exe")
-
-;; (use-package pyvenv
-;;         :ensure t
-;;         :init
-;;         (setenv "test_env" "D:/Aanaconda/envs")
-;;         (pyvenv-mode 1)
-;;         (pyvenv-tracking-mode 1))
-
-;; (pyvenv-activate (expand-file-name "~/anaconda/envs/py27"))
-
-
-;; (add-hook 'python-mode-hook 'anaconda-mode)
-
-;; (global-set-key (kbd "C-c C-c") (kbd "C-u C-c C-c"))
-;; (global-set-key (kbd "M-] p d") (kbd "C-c C-d"))
-
-
-;; (add-hook 'shell-mode-hook 'n-shell-mode-hook)
-;; (defun n-shell-mode-hook ()
-;;   "12Jan2002 - sailor, shell mode customizations."
-;;   (local-set-key '[up] 'comint-previous-input)
-;;   (local-set-key '[down] 'comint-next-input)
-;;   (setq comint-input-sender 'n-shell-simple-send))
-
-(add-hook 'python-mode-hook 'n-python-mode-hook)
-(defun n-python-mode-hook ()
-          (local-set-key (kbd "C-c C-c") (kbd "C-u C-c C-c")))
+;; (add-hook 'python-mode-hook 'n-python-mode-hook)
+;; (defun n-python-mode-hook ()
+;;           (local-set-key (kbd "F5") (kbd "C-u C-c C-c")))
           ;; (global-set-key (kbd "M-] p d") (kbd "C-c C-d")))
 
 ;;====================================================================================
@@ -436,31 +411,10 @@
 (setq ein:use-auto-complete-superpack nil)
 (setq ein:use-smartrep nil)
 
-  ;; (setq ein:use-auto-complete t)
-  ;; (setq ein:complete-on-dot t)
-  ;; (setq ein:completion-backend 'ein:use-company-backend)
-  ;; (setq ein:use-auto-complete-superpack nil)
-;; (setq ein:use-smartrep nil)
 
-;; (use-package ein
-;;   :config
-;;   (setq ein:use-auto-complete t)
-;;   (setq ein:complete-on-dot t)
-;;   (setq ein:completion-backend 'ein:use-company-backend)
-;;   (setq ein:use-auto-complete-superpack nil)
-;;   (setq ein:use-smartrep nil)
-;; )
+(global-set-key (kbd "M-] j s") 'ein:jupyter-server-start)
+(global-set-key (kbd "M-] j t") 'ein:jupyter-server-stop)
 
-;; (require 'ein)
-;; (setq ein:use-auto-complete t)
-;; (setq ein:use-smartrep t)
-
-(global-set-key (kbd "M-] m j") 'ein:jupyter-server-start)
-(global-set-key (kbd "M-] e e") 'ein:jupyter-server-stop)
-
-
-;; (define-key ein:notebook-mode-map "\C-c\C-d"
-;;             'ein:worksheet-delete-cell)
 
 
 ;;====================================================================================
@@ -481,20 +435,13 @@
 (require 'helm-projectile)
 (global-set-key (kbd "M-] f f") 'helm-projectile)
 (global-set-key (kbd "M-] f w") 'helm-projectile-grep)
-;; (global-set-key (kbd "M-] f r") 'helm-projectile-rg)
 
-;; C-1 키로 현재 파일에서 빠르게 특정 함수나 변수로 이동합니다
-;; (global-set-key (kbd "M-] h s") 'helm-semantic)
-                                        ;
-;; C-2 키로 find file 파일이 존재하는지 검색합니다
-;; (global-set-key (kbd "M-] f f") 'helm-find)  
 
-;; C-3 키로 find dir 폴더가 존재하는지 검색합니다
-;; (global-set-key (kbd "M-]  3") 'helm-projectile-find-dir)
+(global-set-key (kbd "M-] c l") 'helm-show-kill-ring)
 
 
 ;;====================================================================================
-;; projecttile & helm-projectile
+;; eyebrowse
 ;;====================================================================================
 
 ;; PACKGE: eyebrowse
@@ -737,23 +684,6 @@ If region is active, apply to active region instead."
 
 ;; =============================================================================
 ;; elpy
-;; (필요 : MELPA, use-package, elpy)
-;; pip install jedi
-;; pip install flake8
-;; pip install importmagic
-;; pip install autopep8
-;; pip install yapf
-;;
-;; elpy 가 과도하게 문법체크를 한다고 생각하면 아래와 같이 설정을 변경할 수 있다.
-;;
-;; ~/.config/flake8 (윈도우는 ~/.flake8)
-;;
-;; [flake8]
-;; # ignore = E226,E302,E41, E111, W191
-;; ignore = W191
-;; # max-line-length = 160
-;; # exclude = tests/*
-;; # max-complexity = 10
 ;; =============================================================================
 
 (use-package elpy
@@ -769,7 +699,8 @@ If region is active, apply to active region instead."
           (lambda ()
             (setq indent-tabs-mode nil)
             (setq tab-width 4)
-            (setq python-indent 4)))
+            (setq python-indent 4))
+            (local-set-key (kbd "<F5>") (kbd "C-u C-c C-c")))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -805,6 +736,8 @@ If region is active, apply to active region instead."
 (setq py-split-windows-on-execute-p nil)
 ; try to automagically figure out indentation
 (setq py-smart-indentation t)
+
+(setq elpy-shell-echo-input nil)
 
 ;; =============================================================================
 ;; ROS xml mode
@@ -876,33 +809,7 @@ If region is active, apply to active region instead."
 
 ;; 공백문자 차이 표시
 (setq smerge-refine-ignore-whitespace nil)
-
-
-;; (use-package dumb-jump
-;;   :bind (("M-g o" . dumb-jump-go-other-window)
-;;          ("M-g j" . dumb-jump-go)
-;;          ("M-g x" . dumb-jump-go-prefer-external)
-;;          ("M-g z" . dumb-jump-go-prefer-external-other-window))
-;;   :config (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
-;;   :ensure)
-
-;; :config
-;; ;; (setq dumb-jump-selector 'ivy) ;; (setq dumb-jump-selector 'helm)
-;; :init
-;; (dumb-jump-mode)
-;; :ensure
-;; )
-
-
-
 (add-to-list 'xref-backend-functions 'dumb-jump-xref-activate t)
-
-
-;; (use-package elpy
-  ;; :ensure t
-  ;; :init
-  ;; (elpy-enable))
-
 
 
 ;==============================================================================
@@ -958,3 +865,40 @@ If region is active, apply to active region instead."
 ;==============================================================================
 
 (global-set-key (kbd "M-] m t") 'treemacs)
+
+
+
+;==============================================================================
+;; lsp_mode
+;==============================================================================
+
+(require 'lsp-mode)
+(use-package lsp-mode
+  :init
+  ;; set prefix for lsp-command-keymap (few alternatives - "C-l", "C-c l")
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
+         (python-mode . lsp)
+         ;; if you want which-key integration
+         (lsp-mode . lsp-enable-which-key-integration))
+  :commands lsp)
+
+;; optionally
+(use-package lsp-ui :commands lsp-ui-mode)
+;; if you are helm user
+(use-package helm-lsp :commands helm-lsp-workspace-symbol)
+;; if you are ivy user
+(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+
+;; optionally if you want to use debugger
+(use-package dap-mode)
+;; (use-package dap-LANGUAGE) to load the dap adapter for your language
+
+;; optional if you want which-key integration
+(use-package which-key
+    :config
+    (which-key-mode))
+
+(setf (lsp-session-folders-blacklist (lsp-session)) nil)
+(lsp--persist-session (lsp-session))
