@@ -32,7 +32,7 @@
  '(jdee-db-spec-breakpoint-face-colors (cons "#181e26" "#3d4c5f"))
  '(objed-cursor-color "#f48fb1")
  '(package-selected-packages
-   '(helm-lsp lsp-ui which-key lsp-python-ms lsp-mode pdf-view-restore wgrep rtags-xref xref dumb-jump dap-mode launch launch-mode undo-tree doom-themes elpygen importmagic py-autopep8 py-yapf auto-complete magit pyenv-mode python-mode setup-cygwin cygwin-mount transpose-frame ipython-shell-send elpy smartparens duplicate-thing company-anaconda web-modeess helm-rg helm-projectile projectile ein jupyter pyvenv flycheck-pyflakes live-py-mode company-jedi jedi anaconda-mode swift-mode ace-window matlab-mode yasnippet swiper iedit highlight-indentation flycheck eyebrowse avy anzu))
+   '(outshine helm-lsp lsp-ui which-key lsp-python-ms lsp-mode pdf-view-restore wgrep rtags-xref xref dumb-jump dap-mode launch launch-mode undo-tree doom-themes elpygen importmagic py-autopep8 py-yapf auto-complete magit pyenv-mode python-mode setup-cygwin cygwin-mount transpose-frame ipython-shell-send elpy smartparens duplicate-thing company-anaconda web-modeess helm-rg helm-projectile projectile ein jupyter pyvenv flycheck-pyflakes live-py-mode company-jedi jedi anaconda-mode swift-mode ace-window matlab-mode yasnippet swiper iedit highlight-indentation flycheck eyebrowse avy anzu))
  '(pdf-view-midnight-colors (cons "#f8f8f2" "#323f4e"))
  '(rustic-ansi-faces
    ["#323f4e" "#f48fb1" "#53e2ae" "#f1fa8c" "#92b6f4" "#BD99FF" "#79e6f3" "#f8f8f2"])
@@ -201,8 +201,8 @@
 (global-set-key (kbd "<f10>") (lambda() (interactive)(find-file "~/.emacs")))
 
 ;; buffer font size 
-(global-set-key (kbd "C-M-+") 'text-scale-increase)
-(global-set-key (kbd "C-M--") 'text-scale-decrease)
+(global-set-key (kbd "M-] s u") 'text-scale-increase)
+(global-set-key (kbd "M-] s d") 'text-scale-decrease)
 
 
 (require 'transpose-frame)
@@ -739,6 +739,9 @@ If region is active, apply to active region instead."
 
 (setq elpy-shell-echo-input nil)
 
+(setq python-indent-guess-indent-offset t)  
+(setq python-indent-guess-indent-offset-verbose nil)
+
 ;; =============================================================================
 ;; ROS xml mode
 ;; =============================================================================
@@ -817,16 +820,7 @@ If region is active, apply to active region instead."
 ;==============================================================================
 
 (require 'cc-mode)
-
- 
-
-; set k&r style
-;; 참고 : http://davidha.wordpress.com/2009/05/15/emacs-cc-modes-built-in-styles-gallery/
-;;(setq c-default-style "k&r")
-
-(setq c-default-style "stroustrup")
-
- 
+(setq c-default-style "stroustrup") 
 
 ;; 들여쓰기
 (define-key c-mode-base-map (kbd "RET") 'newline-and-indent)
@@ -835,16 +829,13 @@ If region is active, apply to active region instead."
 
 (add-hook 'c-mode-common-hook
   (lambda ()
-    ;; 컴파일 관련 단축키
     (local-set-key [f5] 'recompile)
     (local-set-key [C-f5] 'compile)
-    ;; 탭키 설정
     (local-set-key (kbd "<tab>") 'indent-block)
     (setq indent-tabs-mode t)
     (setq tab-width 4)
     ))
 
- 
 
 (setq auto-mode-alist
   (append
@@ -879,6 +870,7 @@ If region is active, apply to active region instead."
   (setq lsp-keymap-prefix "C-c l")
   :hook (;; replace XXX-mode with concrete major-mode(e. g. python-mode)
          (python-mode . lsp)
+         (cc-mode . lsp)
          ;; if you want which-key integration
          (lsp-mode . lsp-enable-which-key-integration))
   :commands lsp)
@@ -888,8 +880,8 @@ If region is active, apply to active region instead."
 ;; if you are helm user
 (use-package helm-lsp :commands helm-lsp-workspace-symbol)
 ;; if you are ivy user
-(use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
-(use-package lsp-treemacs :commands lsp-treemacs-errors-list)
+;; (use-package lsp-ivy :commands lsp-ivy-workspace-symbol)
+;; (use-package lsp-treemacs :commands lsp-treemacs-errors-list)
 
 ;; optionally if you want to use debugger
 (use-package dap-mode)
@@ -902,3 +894,48 @@ If region is active, apply to active region instead."
 
 (setf (lsp-session-folders-blacklist (lsp-session)) nil)
 (lsp--persist-session (lsp-session))
+
+
+
+;==============================================================================
+;; outline 
+;==============================================================================
+
+;; Require packages for following code
+;; (require 'dash)
+;; (require 'outshine)
+
+;; ;; Required for outshine
+;; (add-hook 'outline-minor-mode-hook 'outshine-hook-function)
+
+;; ;; Enables outline-minor-mode for *ALL* programming buffers
+;; (add-hook 'prog-mode-hook 'outline-minor-mode)
+
+
+;; ;; Narrowing now works within the headline rather than requiring to be on it
+;; (advice-add 'outshine-narrow-to-subtree :before
+;;             (lambda (&rest args) (unless (outline-on-heading-p t)
+;;                                    (outline-previous-visible-heading 1))))
+
+;; (spacemacs/set-leader-keys
+;;   ;; Narrowing
+;;   "nn" 'outshine-narrow-to-subtree
+;;   "nw" 'widen
+
+;;   ;; Structural edits
+;;   "nj" 'outline-move-subtree-down
+;;   "nk" 'outline-move-subtree-up
+;;   "nh" 'outline-promote
+;;   "nl" 'outline-demote)
+
+;; (let ((kmap outline-minor-mode-map))
+;;   (define-key kmap (kbd "M-RET") 'outshine-insert-heading)
+;;   (define-key kmap (kbd "<backtab>") 'outshine-cycle-buffer)
+
+;;   ;; Evil outline navigation keybindings
+;;   (evil-define-key '(normal visual motion) kmap
+;;     "gh" 'outline-up-heading
+;;     "gj" 'outline-forward-same-level
+;;     "gk" 'outline-backward-same-level
+;;     "gl" 'outline-next-visible-heading
+;;     "gu" 'outline-previous-visible-heading))
